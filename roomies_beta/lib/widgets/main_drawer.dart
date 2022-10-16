@@ -5,22 +5,25 @@ class MainDrawer extends StatelessWidget {
 
   Widget buildListTile(String title, IconData icon) {
     return ListTile(
-      leading: Container(
-        padding: EdgeInsets.only(right: 0),
-        child: Icon(
-          icon,
-          size: 20,
-        ),
-      ),
-      title: Container(
-        padding: EdgeInsets.only(left: 5),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontFamily: 'Poppins',
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+      minLeadingWidth: 30,
+      leading: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 20,
+            color: Colors.black,
           ),
+        ],
+      ),
+      title: Text(
+        title,
+        textAlign: TextAlign.left,
+        style: const TextStyle(
+          fontFamily: 'Poppins',
+          fontSize: 16,
+          letterSpacing: 1.1,
         ),
       ),
       onTap: () {},
@@ -33,52 +36,53 @@ class MainDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            height: 202,
+            height: 200,
             width: double.infinity,
-            padding: const EdgeInsets.all(20),
             alignment: Alignment.center,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Color.fromARGB(171, 241, 196, 141),
-                  Color(0xFFf1c48d),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
+                const SizedBox(height: 10),
                 CircleAvatar(
                   radius: 40,
-                  backgroundColor: Color.fromARGB(171, 118, 142, 163),
+                  backgroundColor: const Color.fromARGB(171, 118, 142, 163),
                   child: IconButton(
                     color: Colors.black,
                     onPressed: () {},
                     icon: const Icon(size: 30, Icons.file_upload),
                   ),
                 ),
+                const SizedBox(height: 10),
                 const Text(
                   style: TextStyle(
-                    fontFamily: 'Poppins',
                     fontSize: 22,
+                    fontWeight: FontWeight.bold,
                   ),
                   "User",
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text("Edit User Profile",
-                      style: TextStyle(color: Colors.purple)),
-                )
+                  child: Text(
+                    "Edit User Profile",
+                    style:
+                        TextStyle(color: Theme.of(context).colorScheme.primary),
+                  ),
+                ),
               ],
             ),
           ),
-          const SizedBox(height: 10),
+          const Divider(thickness: 1.0),
+          //MY HOUSE FEATURES
+          buildListTile(
+            "My Houses",
+            Icons.home,
+          ),
           buildListTile(
             "Notifications",
-            Icons.notification_add_outlined,
+            Icons.notifications_none,
           ),
+          const Divider(thickness: 1.0),
+          //FEATURES SECTION
           buildListTile(
             "DishTrack",
             Icons.flatware,
@@ -94,6 +98,20 @@ class MainDrawer extends StatelessWidget {
           buildListTile(
             "Report",
             Icons.warning,
+          ),
+          //HELPER SECTION
+          const Divider(thickness: 1.0),
+          buildListTile(
+            "Your Account Settings",
+            Icons.settings,
+          ),
+          buildListTile(
+            "Help",
+            Icons.help,
+          ),
+          buildListTile(
+            "About",
+            Icons.info,
           ),
         ],
       ),

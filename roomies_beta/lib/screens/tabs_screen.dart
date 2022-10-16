@@ -31,7 +31,10 @@ class _TabsScreenState extends State<TabsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Meals'),
+        title: const Text('House'),
+        centerTitle: true,
+        backgroundColor: Colors.white,
+        elevation: 0,
       ),
       drawer: const Drawer(
         child: MainDrawer(),

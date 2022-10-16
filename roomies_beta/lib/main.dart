@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
             ),
       ),
       routes: {
-        '/': (context) => TabsScreen(),
+        '/': (context) => const TabsScreen(),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (ctx) => TabsScreen());
