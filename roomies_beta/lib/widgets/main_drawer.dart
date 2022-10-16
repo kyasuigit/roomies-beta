@@ -21,7 +21,7 @@ class MainDrawer extends StatelessWidget {
         title,
         textAlign: TextAlign.left,
         style: const TextStyle(
-          fontFamily: 'Poppins',
+          fontFamily: 'Gotham',
           fontSize: 16,
           letterSpacing: 1.1,
         ),
@@ -53,11 +53,8 @@ class MainDrawer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  style: TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Text(
+                  style: Theme.of(context).textTheme.titleMedium,
                   "User",
                 ),
                 TextButton(

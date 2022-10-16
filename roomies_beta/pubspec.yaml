@@ -83,6 +83,14 @@ flutter:
           weight: 700
         - asset: assets/fonts/Poppins-Black.ttf
           weight: 900
+
+    - family: Gotham
+      fonts:
+        - asset: assets/fonts/GothamLight.ttf
+        - asset: assets/fonts/Gotham-Bold.otf
+          weight: 700
+        - asset: assets/fonts/Gotham-Black.otf
+          weight: 900
   
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

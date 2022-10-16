@@ -48,11 +48,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch(primarySwatch: primarySwatchColor)
             .copyWith(secondary: secondarySwatchColor),
-        fontFamily: 'Poppins',
+        fontFamily: 'Gotham',
         textTheme: ThemeData.light().textTheme.copyWith(
               titleMedium: const TextStyle(
                 fontSize: 20,
-                fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
               ),
             ),
