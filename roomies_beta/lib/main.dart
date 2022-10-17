@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:roomies_beta/models/house.dart';
+import 'package:uuid/uuid.dart';
 
+import './models/user.dart';
 import './screens/tabs_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   static const MaterialColor primarySwatchColor = MaterialColor(
     0xFF8dbaf1,
     <int, Color>{
@@ -39,20 +42,36 @@ class MyApp extends StatelessWidget {
     },
   );
 
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late User appUser;
+
+  @override
+  void initState() {
+    var uuid = Uuid();
+    late String uniqueId = uuid.v4();
+
+    appUser = User(username: 'kyasui', userId: uniqueId, displayName: 'Kohei');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Roomies',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: primarySwatchColor)
-            .copyWith(secondary: secondarySwatchColor),
-        fontFamily: 'Gotham',
+        colorScheme:
+            ColorScheme.fromSwatch(primarySwatch: MyApp.primarySwatchColor)
+                .copyWith(secondary: MyApp.secondarySwatchColor),
+        fontFamily: 'Poppins',
         textTheme: ThemeData.light().textTheme.copyWith(
               titleMedium: const TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
       ),
@@ -60,7 +79,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const TabsScreen(),
       },
       onUnknownRoute: (settings) {
-        return MaterialPageRoute(builder: (ctx) => TabsScreen());
+        return MaterialPageRoute(builder: (ctx) => const TabsScreen());
       },
     );
   }

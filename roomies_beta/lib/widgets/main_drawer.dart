@@ -52,7 +52,7 @@ class MainDrawer extends StatelessWidget {
                     icon: const Icon(size: 30, Icons.file_upload),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 4),
                 Text(
                   style: Theme.of(context).textTheme.titleMedium,
                   "User",

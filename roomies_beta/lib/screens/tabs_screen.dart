@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
+import './home_screen.dart';
 import './dish_track_screen.dart';
 import './grocery_track_screen.dart';
 import './fridge_track_screen.dart';
 import './report_system_screen.dart';
 import '../widgets/main_drawer.dart';
+
+import '../models/house.dart';
+import '../models/user.dart';
 
 class TabsScreen extends StatefulWidget {
   const TabsScreen({super.key});
@@ -15,6 +19,7 @@ class TabsScreen extends StatefulWidget {
 
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
+    const HomeScreen(),
     const DishTrackScreen(),
     const GroceryTrackScreen(),
     const FridgeTrackScreen(),
@@ -47,6 +52,10 @@ class _TabsScreenState extends State<TabsScreen> {
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         currentIndex: _selectedPageIndex,
         items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.flatware),
             label: 'DishTrack',
