@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../screens/home_screen.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
-  Widget buildListTile(String title, IconData icon) {
+  Widget buildListTile(String title, IconData icon, Function goToScreen) {
     return ListTile(
       minLeadingWidth: 30,
       leading: Column(
@@ -12,7 +14,7 @@ class MainDrawer extends StatelessWidget {
         children: [
           Icon(
             icon,
-            size: 20,
+            size: 18,
             color: Colors.black,
           ),
         ],
@@ -22,11 +24,11 @@ class MainDrawer extends StatelessWidget {
         textAlign: TextAlign.left,
         style: const TextStyle(
           fontFamily: 'Gotham',
-          fontSize: 16,
-          letterSpacing: 1.1,
+          fontSize: 14,
+          letterSpacing: 0.5,
         ),
       ),
-      onTap: () {},
+      onTap: () => goToScreen,
     );
   }
 
@@ -45,7 +47,7 @@ class MainDrawer extends StatelessWidget {
                 const SizedBox(height: 10),
                 CircleAvatar(
                   radius: 40,
-                  backgroundColor: const Color.fromARGB(171, 118, 142, 163),
+                  backgroundColor: const Color.fromARGB(171, 66, 121, 168),
                   child: IconButton(
                     color: Colors.black,
                     onPressed: () {},
@@ -73,42 +75,51 @@ class MainDrawer extends StatelessWidget {
           buildListTile(
             "My Houses",
             Icons.home,
+            () {},
           ),
           buildListTile(
             "Notifications",
             Icons.notifications_none,
+            () {},
           ),
           const Divider(thickness: 1.0),
           //FEATURES SECTION
           buildListTile(
             "DishTrack",
             Icons.flatware,
+            () {},
           ),
           buildListTile(
             "FridgeTrack",
             Icons.calendar_today,
+            () {},
           ),
           buildListTile(
             "GroceryTrack",
             Icons.local_grocery_store,
+            () {},
           ),
           buildListTile(
             "Report",
             Icons.warning,
+            () {},
           ),
           //HELPER SECTION
           const Divider(thickness: 1.0),
           buildListTile(
             "Your Account Settings",
             Icons.settings,
+            () {},
           ),
           buildListTile(
             "Help",
             Icons.help,
+            () {},
           ),
           buildListTile(
             "About",
             Icons.info,
+            () {},
           ),
         ],
       ),

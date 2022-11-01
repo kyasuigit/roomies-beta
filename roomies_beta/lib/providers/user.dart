@@ -1,17 +1,13 @@
 import "package:flutter/material.dart";
-import "./house.dart";
+import "package:flutter/foundation.dart";
 
-class User {
-  late String _userName;
-  late String _userId;
-  late String _displayName;
+class User with ChangeNotifier {
+  String _userName = '';
+  String _userId = '';
+  String _displayName = '';
 
-  User({
-    required username,
-    required userId,
-    required displayName,
-  }) {
-    _userName = username;
+  User(userName, userId, displayName) {
+    _userName = userName;
     _userId = userId;
     _displayName = displayName;
   }
@@ -34,5 +30,6 @@ class User {
 
   void setDisplayName(String newDisplayName) {
     _displayName = newDisplayName;
+    notifyListeners();
   }
 }

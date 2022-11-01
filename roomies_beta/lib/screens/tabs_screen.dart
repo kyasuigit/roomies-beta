@@ -7,10 +7,8 @@ import './fridge_track_screen.dart';
 import './report_system_screen.dart';
 import '../widgets/main_drawer.dart';
 
-import '../models/house.dart';
-import '../models/user.dart';
-
 class TabsScreen extends StatefulWidget {
+  static const routeName = '/tabs';
   const TabsScreen({super.key});
 
   @override
@@ -35,22 +33,50 @@ class _TabsScreenState extends State<TabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('House'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              '38 Beverley',
+              style: TextStyle(fontSize: 18),
+            ),
+            InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {},
+              child: const Icon(
+                Icons.expand_more,
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       drawer: const Drawer(
         child: MainDrawer(),
       ),
       body: _pages[_selectedPageIndex],
       bottomNavigationBar: BottomNavigationBar(
+        iconSize: 24,
         onTap: _selectPage,
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: Colors.white,
         unselectedItemColor: Theme.of(context).colorScheme.primary,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         currentIndex: _selectedPageIndex,
+        showUnselectedLabels: true,
+        selectedFontSize: 13,
+        unselectedFontSize: 13,
+        type: BottomNavigationBarType.fixed,
+        elevation: 0,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

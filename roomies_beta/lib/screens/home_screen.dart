@@ -1,12 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:roomies_beta/widgets/home_screen/your_tasks_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../widgets/home_screen/roommates_widget.dart';
+import '../providers/user.dart';
+import '../providers/house.dart';
+import '../widgets/home_screen/ad_card.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool taskIsMinimized = false;
+  bool roommatesIsMinimized = false;
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Home Page"),
+    final user = Provider.of<User>(context);
+    return SingleChildScrollView(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+              child: Text(
+                "Good ${DateTime.now().hour < 12 ? 'Morning' : DateTime.now().hour < 17 ? 'Afternoon' : 'Evening'}, \n${user.getDisplayName}",
+                style: const TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.w600,
+                  fontFamily: 'Gotham',
+                ),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            const SizedBox(height: 10),
+            const AdCard(),
+            const SizedBox(height: 15),
+
+            const YourTasksWidget(),
+
+            const SizedBox(height: 15),
+
+            const RoommatesWidget(), // ROOMMATES SECTION
+            const SizedBox(height: 400),
+          ],
+        ),
+      ),
     );
   }
 }
