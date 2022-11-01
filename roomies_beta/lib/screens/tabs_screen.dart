@@ -87,16 +87,16 @@ class _TabsScreenState extends State<TabsScreen> {
             label: 'DishTrack',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
-            label: 'FridgeTrack',
+            icon: Icon(Icons.message),
+            label: 'Message',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_grocery_store),
             label: 'GroceryTrack',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.warning),
-            label: 'Report',
+            icon: Icon(Icons.more_horiz_outlined),
+            label: '',
           ),
         ],
       ),

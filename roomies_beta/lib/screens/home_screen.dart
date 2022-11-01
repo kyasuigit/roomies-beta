@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:roomies_beta/widgets/home_screen/your_tasks_widget.dart';
 
+import '../widgets/home_screen/overview_widget.dart';
 import '../widgets/home_screen/roommates_widget.dart';
 import '../providers/user.dart';
 import '../providers/house.dart';
@@ -40,10 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 10),
-            const AdCard(),
+            const AdCard(), // AD
             const SizedBox(height: 15),
 
-            const YourTasksWidget(),
+            const OverviewWidget(), // OVERVIEW SECTION
 
             const SizedBox(height: 15),
 

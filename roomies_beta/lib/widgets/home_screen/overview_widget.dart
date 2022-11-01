@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class YourTasksWidget extends StatefulWidget {
-  const YourTasksWidget({super.key});
+class OverviewWidget extends StatefulWidget {
+  const OverviewWidget({super.key});
 
   @override
-  State<YourTasksWidget> createState() => _YourTasksWidgetState();
+  State<OverviewWidget> createState() => _OverviewWidgetState();
 }
 
-class _YourTasksWidgetState extends State<YourTasksWidget> {
+class _OverviewWidgetState extends State<OverviewWidget> {
   late List<YourTasks> _tasks;
   late TooltipBehavior _tooltipBehavior;
   bool _isMinimized = false;
@@ -30,7 +30,7 @@ class _YourTasksWidgetState extends State<YourTasksWidget> {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: const Text(
-                'Your Tasks',
+                'Overview',
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
@@ -51,31 +51,34 @@ class _YourTasksWidgetState extends State<YourTasksWidget> {
           ],
         ),
         const SizedBox(height: 5),
-        Card(
-          child: SizedBox(
-            height: 250,
-            child: SfCircularChart(
-              tooltipBehavior: _tooltipBehavior,
-              legend: Legend(
-                isVisible: true,
-                position: LegendPosition.bottom,
-                overflowMode: LegendItemOverflowMode.scroll,
-                orientation: LegendItemOrientation.auto,
-                alignment: ChartAlignment.center,
-                shouldAlwaysShowScrollbar: true,
+        _isMinimized
+            ? Container()
+            : Card(
+                child: SizedBox(
+                  height: 250,
+                  child: SfCircularChart(
+                    tooltipBehavior: _tooltipBehavior,
+                    legend: Legend(
+                      isVisible: true,
+                      position: LegendPosition.bottom,
+                      overflowMode: LegendItemOverflowMode.scroll,
+                      orientation: LegendItemOrientation.auto,
+                      alignment: ChartAlignment.center,
+                      shouldAlwaysShowScrollbar: true,
+                    ),
+                    series: <CircularSeries>[
+                      PieSeries<YourTasks, String>(
+                        dataSource: _tasks,
+                        xValueMapper: (YourTasks task, _) => task.taskName,
+                        yValueMapper: (YourTasks task, _) => task.count,
+                        dataLabelSettings:
+                            const DataLabelSettings(isVisible: true),
+                        enableTooltip: true,
+                      )
+                    ],
+                  ),
+                ),
               ),
-              series: <CircularSeries>[
-                PieSeries<YourTasks, String>(
-                  dataSource: _tasks,
-                  xValueMapper: (YourTasks task, _) => task.taskName,
-                  yValueMapper: (YourTasks task, _) => task.count,
-                  dataLabelSettings: const DataLabelSettings(isVisible: true),
-                  enableTooltip: true,
-                )
-              ],
-            ),
-          ),
-        ),
       ],
     );
   }
