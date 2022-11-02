@@ -10,6 +10,7 @@ class RoommatesWidget extends StatefulWidget {
 class _RoommatesWidgetState extends State<RoommatesWidget> {
   final int _userCount = 4;
   bool _isMinimized = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(

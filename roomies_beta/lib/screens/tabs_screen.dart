@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import './home_screen.dart';
-import './dish_track_screen.dart';
-import './grocery_track_screen.dart';
-import './fridge_track_screen.dart';
-import './report_system_screen.dart';
+import './chores_screen.dart';
+import './chat_screen.dart';
+import './money_screen.dart';
+import 'calendar_screen.dart';
 import '../widgets/main_drawer.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -18,10 +18,10 @@ class TabsScreen extends StatefulWidget {
 class _TabsScreenState extends State<TabsScreen> {
   final List<Widget> _pages = [
     const HomeScreen(),
-    const DishTrackScreen(),
-    const GroceryTrackScreen(),
-    const FridgeTrackScreen(),
-    const ReportSystemScreen(),
+    const ChoresScreen(),
+    const ChatScreen(),
+    const MoneyScreen(),
+    const CalendarScreen(),
   ];
 
   int _selectedPageIndex = 0;
@@ -83,20 +83,20 @@ class _TabsScreenState extends State<TabsScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.flatware),
-            label: 'DishTrack',
+            icon: Icon(Icons.clean_hands),
+            label: 'Chores',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.message),
             label: 'Message',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.local_grocery_store),
-            label: 'GroceryTrack',
+            icon: Icon(Icons.money),
+            label: 'Money',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz_outlined),
-            label: '',
+            icon: Icon(Icons.calendar_month),
+            label: 'Calendar',
           ),
         ],
       ),
