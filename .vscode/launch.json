@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "roomies_beta",
+            "cwd": "roomies_beta",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "roomies_beta (profile mode)",
+            "cwd": "roomies_beta",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "roomies_beta (release mode)",
+            "cwd": "roomies_beta",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

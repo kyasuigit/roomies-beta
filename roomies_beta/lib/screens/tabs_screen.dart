@@ -38,12 +38,13 @@ class _TabsScreenState extends State<TabsScreen> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Icon(Icons.location_on),
             const Text(
               '38 Beverley',
               style: TextStyle(fontSize: 18),
             ),
             InkWell(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(30),
               onTap: () {},
               child: const Icon(
                 Icons.expand_more,
@@ -57,7 +58,7 @@ class _TabsScreenState extends State<TabsScreen> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.settings),
+            icon: const Icon(Icons.notifications_none),
           ),
         ],
       ),
@@ -77,6 +78,7 @@ class _TabsScreenState extends State<TabsScreen> {
         unselectedFontSize: 13,
         type: BottomNavigationBarType.fixed,
         elevation: 0,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),

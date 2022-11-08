@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 
 import 'providers/user.dart';
 import './screens/tabs_screen.dart';
+import './screens/auth_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -57,7 +58,6 @@ class _MyAppState extends State<MyApp> {
     String uniqueId = uuid.v4();
 
     appUser = User('kyasui', uniqueId, 'Kohei');
-
     super.initState();
   }
 
@@ -81,7 +81,7 @@ class _MyAppState extends State<MyApp> {
               ),
         ),
         routes: {
-          '/': (context) => const TabsScreen(),
+          '/': (context) => AuthScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => const TabsScreen());

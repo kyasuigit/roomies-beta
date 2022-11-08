@@ -8,48 +8,46 @@ class AdCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: const Color.fromARGB(255, 255, 204, 128),
+      color: const Color.fromRGBO(255, 204, 128, 1),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               flex: 5,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     child: const Text(
                       "Do you want to \nsupport us?",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 22.0,
+                        fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.left,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50.0),
-                          color: Colors.white,
-                        ),
-                        child: const Text(
-                          'Buy us a coffee!',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 255, 204, 128),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 4.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50.0),
+                      color: Colors.white,
+                    ),
+                    child: const Text(
+                      'Buy us a coffee!',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 255, 204, 128),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
                       ),
-                    ],
+                      textAlign: TextAlign.start,
+                    ),
                   ),
                 ],
               ),
