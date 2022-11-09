@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
-enum AuthMode { Signup, Login }
+import './signin_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -17,27 +15,24 @@ class AuthScreen extends StatelessWidget {
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(255, 95, 109, 1),
-                  Color.fromRGBO(255, 195, 113, 1),
+                  Color.fromRGBO(249, 160, 63, 1),
+                  Color.fromRGBO(247, 212, 136, 1),
                 ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
               ),
             ),
           ),
           SizedBox(
-            height: deviceSize.height,
-            width: deviceSize.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Flexible(
+                  flex: 3,
                   child: Container(
-                    margin: EdgeInsets.only(
-                      right: deviceSize.width * 0.05,
-                      left: deviceSize.width * 0.05,
-                    ),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: deviceSize.width * 0.03),
                     padding: const EdgeInsets.symmetric(
                         vertical: 8.0, horizontal: 8.0),
                     child: Image.asset(
@@ -48,41 +43,46 @@ class AuthScreen extends StatelessWidget {
                 ),
                 Flexible(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton(
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
-                              Size(deviceSize.width * 0.7, 50)),
+                            Size(deviceSize.width * 0.8, 50),
+                          ),
                           shape: MaterialStateProperty.all(
                             const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(40),
+                                Radius.circular(25),
                               ),
                             ),
                           ),
                           foregroundColor:
-                              MaterialStateProperty.all(Colors.black),
+                              MaterialStateProperty.all(Colors.white),
                           backgroundColor: MaterialStateProperty.all(
-                            const Color.fromRGBO(133, 235, 255, 1),
+                            const Color.fromRGBO(222, 110, 75, 0.8),
                           ),
                           shadowColor: MaterialStateProperty.all(Colors.grey),
-                          elevation: MaterialStateProperty.all(5),
+                          elevation: MaterialStateProperty.all(2),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(SigninScreen.routeName);
+                        },
                         child: const Text(
                           "Sign In",
-                          style: TextStyle(fontSize: 16),
+                          style: TextStyle(fontSize: 18),
                         ),
                       ),
-                      SizedBox(height: deviceSize.height * 0.03),
+                      SizedBox(height: deviceSize.height * 0.02),
                       ElevatedButton(
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
-                              Size(deviceSize.width * 0.7, 50)),
+                              Size(deviceSize.width * 0.8, 50)),
                           shape: MaterialStateProperty.all(
                             const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(40),
+                                Radius.circular(25),
                               ),
                             ),
                           ),
@@ -92,7 +92,7 @@ class AuthScreen extends StatelessWidget {
                             Colors.white,
                           ),
                           shadowColor: MaterialStateProperty.all(Colors.grey),
-                          elevation: MaterialStateProperty.all(5),
+                          elevation: MaterialStateProperty.all(2),
                         ),
                         onPressed: () {},
                         child: const Text(
@@ -104,17 +104,32 @@ class AuthScreen extends StatelessWidget {
                   ),
                 ),
                 Flexible(
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
-                      CircleAvatar(radius: 30),
-                      CircleAvatar(radius: 30),
-                      CircleAvatar(radius: 30),
-                      CircleAvatar(radius: 30),
-                    ],
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const CircleAvatar(
+                          radius: 25,
+                          backgroundColor: Color.fromRGBO(249, 160, 63, 1),
+                        ),
+                        SizedBox(width: deviceSize.width * 0.01),
+                        const CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Color.fromRGBO(249, 160, 63, 1)),
+                        SizedBox(width: deviceSize.width * 0.01),
+                        const CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Color.fromRGBO(249, 160, 63, 1)),
+                        SizedBox(width: deviceSize.width * 0.01),
+                        const CircleAvatar(
+                            radius: 25,
+                            backgroundColor: Color.fromRGBO(249, 160, 63, 1)),
+                      ],
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ),

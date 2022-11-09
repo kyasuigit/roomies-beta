@@ -5,6 +5,7 @@ import 'package:uuid/uuid.dart';
 import 'providers/user.dart';
 import './screens/tabs_screen.dart';
 import './screens/auth_screen.dart';
+import './screens/signin_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -82,6 +83,7 @@ class _MyAppState extends State<MyApp> {
         ),
         routes: {
           '/': (context) => AuthScreen(),
+          SigninScreen.routeName: (context) => const SigninScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => const TabsScreen());
