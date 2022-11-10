@@ -120,8 +120,19 @@ class MainDrawer extends StatelessWidget {
           buildListTile(
             "Logout",
             Icons.exit_to_app,
-            () {
-              FirebaseAuth.instance.signOut();
+            ([mounted = true]) async {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              );
+              await FirebaseAuth.instance.signOut();
+
+              if (!mounted) return;
+              Navigator.of(context).pop();
             },
           ),
         ],

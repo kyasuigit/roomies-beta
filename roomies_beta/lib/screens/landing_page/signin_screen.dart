@@ -3,10 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-import 'create_account_screen.dart';
+import '../../transitions/sliding_page_route.dart';
+import './create_account_screen.dart';
 
 class SigninScreen extends StatefulWidget {
-  SigninScreen({super.key});
+  const SigninScreen({super.key});
   static const routeName = '/login_screen';
 
   @override
@@ -22,17 +23,44 @@ class _SigninScreenState extends State<SigninScreen> {
   String _password = '';
 
   Future signIn(BuildContext context) async {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(child: CircularProgressIndicator());
-      },
-    );
+    try {
+      formKey.currentState!.save();
 
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: _email.trim(),
-      password: _password.trim(),
-    );
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(child: CircularProgressIndicator());
+        },
+      );
+
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _email.trim(),
+        password: _password.trim(),
+      );
+
+      if (!mounted) return;
+
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    } on FirebaseAuthException catch (error) {
+      Navigator.of(context).pop();
+      var errorMsg = '';
+      switch (error.code) {
+        case ('wrong-password'):
+          errorMsg = 'That\'s not the right password!';
+          break;
+        case ('invalid-email'):
+          errorMsg = 'Something is not right \nwith that email!';
+          break;
+        case ('user-disabled'):
+          errorMsg = 'That user is disabled!';
+          break;
+        case ('user-not-found'):
+          errorMsg = 'That user was not found!';
+          break;
+      }
+      showErrorBox(context, errorMsg);
+    }
   }
 
   void showErrorBox(BuildContext ctx, String errorMsg) {
@@ -70,7 +98,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text(
                   errorMsg,
-                  style: TextStyle(fontSize: 14),
+                  style: const TextStyle(fontSize: 14),
                 ),
               ),
             ],
@@ -82,6 +110,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final passwordFocus = FocusNode();
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -244,6 +273,10 @@ class _SigninScreenState extends State<SigninScreen> {
                           ),
                           style: const TextStyle(fontSize: 15),
                           textAlignVertical: TextAlignVertical.center,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).requestFocus(passwordFocus);
+                          },
                         ),
                         SizedBox(height: deviceSize.height * 0.02),
                         //PASSWORD FIELD
@@ -298,6 +331,15 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                           ),
                           style: const TextStyle(fontSize: 15),
+                          focusNode: passwordFocus,
+                          onFieldSubmitted: (_) {
+                            if (!formKey.currentState!.validate()) {
+                              inputError = true;
+                              return;
+                            } else {
+                              signIn(context);
+                            }
+                          },
                         ),
                         SizedBox(height: deviceSize.height * 0.02),
                         ElevatedButton(
@@ -320,38 +362,12 @@ class _SigninScreenState extends State<SigninScreen> {
                             shadowColor: MaterialStateProperty.all(Colors.grey),
                             elevation: MaterialStateProperty.all(2),
                           ),
-                          onPressed: ([mounted = true]) async {
+                          onPressed: () async {
                             if (!formKey.currentState!.validate()) {
                               inputError = true;
                               return;
                             } else {
-                              formKey.currentState!.save();
-                              try {
-                                await signIn(context);
-                                if (!mounted) return;
-
-                                Navigator.of(context).pop();
-                                Navigator.of(context).pop();
-                              } on FirebaseAuthException catch (error) {
-                                Navigator.of(context).pop();
-                                var errorMsg = '';
-                                switch (error.code) {
-                                  case ('wrong-password'):
-                                    errorMsg =
-                                        'That\'s not the right password!';
-                                    break;
-                                  case ('invalid-email'):
-                                    errorMsg =
-                                        'Something is not right with that email!';
-                                    break;
-                                  case ('user-disabled'):
-                                    errorMsg = 'That user is disabled!';
-                                    break;
-                                  case ('user-not-found'):
-                                    errorMsg = 'That user was not found!';
-                                }
-                                showErrorBox(context, errorMsg);
-                              }
+                              signIn(context);
                             }
                           },
                           child: const Text(
@@ -384,8 +400,10 @@ class _SigninScreenState extends State<SigninScreen> {
                             SizedBox(width: deviceSize.width * 0.015),
                             GestureDetector(
                               onTap: () {
-                                Navigator.of(context).pushReplacementNamed(
-                                    CreateAccountScreen.routeName);
+                                Navigator.of(context).pushReplacement(
+                                    SlidingPageRoute(
+                                        child: CreateAccountScreen(),
+                                        route: CreateAccountScreen.routeName));
                               },
                               child: const Text(
                                 'Sign up!',

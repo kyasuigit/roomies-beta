@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../transitions/sliding_page_route.dart';
 import './create_account_screen.dart';
 import 'signin_screen.dart';
 
@@ -49,7 +52,7 @@ class AuthScreen extends StatelessWidget {
                       ElevatedButton(
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
-                            Size(deviceSize.width * 0.8, 50),
+                            Size(deviceSize.width * 0.75, 50),
                           ),
                           shape: MaterialStateProperty.all(
                             const RoundedRectangleBorder(
@@ -67,8 +70,9 @@ class AuthScreen extends StatelessWidget {
                           elevation: MaterialStateProperty.all(2),
                         ),
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(SigninScreen.routeName);
+                          Navigator.of(context).push(SlidingPageRoute(
+                              child: SigninScreen(),
+                              route: SigninScreen.routeName));
                         },
                         child: const Text(
                           "Sign In",
@@ -80,7 +84,7 @@ class AuthScreen extends StatelessWidget {
                       ElevatedButton(
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
-                              Size(deviceSize.width * 0.8, 50)),
+                              Size(deviceSize.width * 0.75, 50)),
                           shape: MaterialStateProperty.all(
                             const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -97,8 +101,9 @@ class AuthScreen extends StatelessWidget {
                           elevation: MaterialStateProperty.all(2),
                         ),
                         onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(CreateAccountScreen.routeName);
+                          Navigator.of(context).push(SlidingPageRoute(
+                              child: CreateAccountScreen(),
+                              route: CreateAccountScreen.routeName));
                         },
                         child: const Text(
                           "Create an Account",
