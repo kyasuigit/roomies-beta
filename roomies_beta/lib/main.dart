@@ -1,13 +1,22 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'firebase_options.dart';
 
 import 'providers/user.dart';
 import './screens/tabs_screen.dart';
-import './screens/auth_screen.dart';
-import './screens/signin_screen.dart';
+import './screens/landing_page/create_account_screen.dart';
+import './screens/landing_page/signin_screen.dart';
+import './main_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(MyApp());
 }
 
@@ -59,6 +68,7 @@ class _MyAppState extends State<MyApp> {
     String uniqueId = uuid.v4();
 
     appUser = User('kyasui', uniqueId, 'Kohei');
+
     super.initState();
   }
 
@@ -81,9 +91,10 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
         ),
+        home: MainPage(),
         routes: {
-          '/': (context) => AuthScreen(),
-          SigninScreen.routeName: (context) => const SigninScreen(),
+          SigninScreen.routeName: (context) => SigninScreen(),
+          CreateAccountScreen.routeName: (context) => CreateAccountScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => const TabsScreen());

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:roomies_beta/screens/landing_page/signin_screen.dart';
 
-class SigninScreen extends StatelessWidget {
-  const SigninScreen({super.key});
-  static const routeName = '/login_screen';
+class CreateAccountScreen extends StatelessWidget {
+  CreateAccountScreen({super.key});
+  static const routeName = '/create_account';
+
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,28 +40,30 @@ class SigninScreen extends StatelessWidget {
                 height: deviceSize.height * 0.17,
                 width: deviceSize.width,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(left: deviceSize.width * 0.03),
+                      child: Lottie.network(
+                        'https://assets5.lottiefiles.com/packages/lf20_R7qGYA.json',
+                      ),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(
-                          left: deviceSize.width * 0.055,
+                          right: deviceSize.width * 0.055,
                           bottom: deviceSize.height * 0.04),
                       child: const Text(
-                        "Sign in",
+                        'Create \nAccount',
                         style: TextStyle(
-                          fontSize: 40,
+                          fontSize: 42,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
+                        textAlign: TextAlign.end,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(right: deviceSize.width * 0.03),
-                      child: Lottie.network(
-                        'https://assets4.lottiefiles.com/packages/lf20_AdPoAxJwgA.json',
-                      ),
-                    )
                   ],
                 ),
               ),
@@ -91,11 +98,29 @@ class SigninScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      SizedBox(height: deviceSize.height * 0.08),
+                      SizedBox(height: deviceSize.height * 0.03),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Text(
+                              "Sign up to begin!",
+                              textAlign: TextAlign.start,
+                              style: TextStyle(
+                                  color: Colors.grey.shade400,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: deviceSize.height * 0.03),
                       SizedBox(
                         // EMAIL FIELD
                         height: 50,
                         child: TextField(
+                          controller: _emailController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(25),
@@ -103,13 +128,25 @@ class SigninScreen extends StatelessWidget {
                             ),
                             labelText: 'Email',
                             labelStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),
                             ),
                             filled: true,
                             fillColor: const Color.fromRGBO(237, 240, 247, 0.7),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(249, 160, 63, 1),
+                                width: 1.5,
+                              ),
+                            ),
+                            floatingLabelStyle: const TextStyle(
+                              color: Color.fromRGBO(249, 160, 63, 1),
+                              fontSize: 20,
+                            ),
                           ),
-                          style: const TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 15),
+                          textAlignVertical: TextAlignVertical.center,
                         ),
                       ),
                       SizedBox(height: deviceSize.height * 0.02),
@@ -117,6 +154,7 @@ class SigninScreen extends StatelessWidget {
                         // PASSWORD FIELD
                         height: 50,
                         child: TextField(
+                          controller: _passwordController,
                           obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
@@ -125,16 +163,61 @@ class SigninScreen extends StatelessWidget {
                             ),
                             labelText: 'Password',
                             labelStyle: const TextStyle(
-                              fontSize: 14,
+                              fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),
                             ),
                             filled: true,
                             fillColor: const Color.fromRGBO(237, 240, 247, 0.7),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(249, 160, 63, 1),
+                                width: 1.5,
+                              ),
+                            ),
+                            floatingLabelStyle: const TextStyle(
+                              color: Color.fromRGBO(249, 160, 63, 1),
+                              fontSize: 20,
+                            ),
                           ),
-                          style: const TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ),
                       SizedBox(height: deviceSize.height * 0.02),
+                      SizedBox(
+                        // CONFIRM PASSWORD FIELD
+                        height: 50,
+                        child: TextField(
+                          controller: _confirmPasswordController,
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: BorderSide.none,
+                            ),
+                            labelText: 'Confirm Password',
+                            labelStyle: const TextStyle(
+                              fontSize: 15,
+                              color: Color.fromRGBO(206, 209, 216, 1),
+                            ),
+                            filled: true,
+                            fillColor: const Color.fromRGBO(237, 240, 247, 0.7),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(249, 160, 63, 1),
+                                width: 1.5,
+                              ),
+                            ),
+                            floatingLabelStyle: const TextStyle(
+                              color: Color.fromRGBO(249, 160, 63, 1),
+                              fontSize: 20,
+                            ),
+                          ),
+                          style: const TextStyle(fontSize: 15),
+                        ),
+                      ),
+                      SizedBox(height: deviceSize.height * 0.05),
                       ElevatedButton(
                         style: ButtonStyle(
                           minimumSize: MaterialStateProperty.all(
@@ -157,37 +240,28 @@ class SigninScreen extends StatelessWidget {
                         ),
                         onPressed: () {},
                         child: const Text(
-                          "Sign In",
+                          "Create Account",
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
-                      SizedBox(height: deviceSize.height * 0.03),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          "Forgot password?",
-                          style: TextStyle(
-                            color: Color.fromRGBO(222, 110, 75, 0.8),
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: deviceSize.height * 0.27),
+                      SizedBox(height: deviceSize.height * 0.20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            'Don\'t have an account?',
+                            'Already have an account?',
                             style: TextStyle(
                               color: Colors.grey.shade400,
                             ),
                           ),
                           SizedBox(width: deviceSize.width * 0.02),
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.of(context)
+                                  .pushReplacementNamed(SigninScreen.routeName);
+                            },
                             child: const Text(
-                              'Sign up',
+                              'Sign in!',
                               style: TextStyle(
                                 color: Color.fromRGBO(222, 110, 75, 0.8),
                               ),

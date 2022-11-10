@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './signin_screen.dart';
+import './create_account_screen.dart';
+import 'signin_screen.dart';
 
 class AuthScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -71,7 +72,8 @@ class AuthScreen extends StatelessWidget {
                         },
                         child: const Text(
                           "Sign In",
-                          style: TextStyle(fontSize: 18),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                         ),
                       ),
                       SizedBox(height: deviceSize.height * 0.02),
@@ -86,18 +88,23 @@ class AuthScreen extends StatelessWidget {
                               ),
                             ),
                           ),
-                          foregroundColor:
-                              MaterialStateProperty.all(Colors.black),
+                          foregroundColor: MaterialStateProperty.all(
+                              const Color.fromRGBO(222, 110, 75, 0.8)),
                           backgroundColor: MaterialStateProperty.all(
                             Colors.white,
                           ),
                           shadowColor: MaterialStateProperty.all(Colors.grey),
                           elevation: MaterialStateProperty.all(2),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(CreateAccountScreen.routeName);
+                        },
                         child: const Text(
-                          "Create Account",
-                          style: TextStyle(fontSize: 16),
+                          "Create an Account",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
                       ),
                     ],

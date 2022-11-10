@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "345685335313",
+    "project_id": "roommate-app-562f3",
+    "storage_bucket": "roommate-app-562f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:345685335313:android:3c4ad6bec05b4a7b6700b0",
+        "android_client_info": {
+          "package_name": "com.roommatesapp.uni_life_planner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "345685335313-av9d7cg6d5j3bjrv7m3b3k3tkg6ieuk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWvSiK7aLSh5KTaJKhTuB5bsy0opFnLXM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "345685335313-av9d7cg6d5j3bjrv7m3b3k3tkg6ieuk9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "345685335313-j16js2tsccr44jfc9m4eb8i37098hjdj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.roomiesBeta"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

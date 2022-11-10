@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../screens/home_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
 
-  Widget buildListTile(String title, IconData icon, Function goToScreen) {
+  Widget buildListTile(String title, IconData icon, VoidCallback goToScreen) {
     return ListTile(
       minLeadingWidth: 30,
       leading: Column(
@@ -28,7 +29,7 @@ class MainDrawer extends StatelessWidget {
           letterSpacing: 0.5,
         ),
       ),
-      onTap: () => goToScreen,
+      onTap: goToScreen,
     );
   }
 
@@ -117,9 +118,11 @@ class MainDrawer extends StatelessWidget {
             () {},
           ),
           buildListTile(
-            "About",
-            Icons.info,
-            () {},
+            "Logout",
+            Icons.exit_to_app,
+            () {
+              FirebaseAuth.instance.signOut();
+            },
           ),
         ],
       ),
