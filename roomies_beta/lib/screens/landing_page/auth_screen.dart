@@ -102,7 +102,7 @@ class AuthScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(SlidingPageRoute(
-                              child: CreateAccountScreen(),
+                              child: const CreateAccountScreen(),
                               route: CreateAccountScreen.routeName));
                         },
                         child: const Text(

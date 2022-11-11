@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../transitions/sliding_page_route.dart';
 import './create_account_screen.dart';
+import './forgot_password_page.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -377,7 +378,11 @@ class _SigninScreenState extends State<SigninScreen> {
                         ),
                         SizedBox(height: deviceSize.height * 0.03),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).push(SlidingPageRoute(
+                                child: const ForgotPasswordPage(),
+                                route: ForgotPasswordPage.routeName));
+                          },
                           child: const Text(
                             "Forgot password?",
                             style: TextStyle(
@@ -387,7 +392,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(height: deviceSize.height * 0.27),
+                        SizedBox(height: deviceSize.height * 0.23),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -402,7 +407,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               onTap: () {
                                 Navigator.of(context).pushReplacement(
                                     SlidingPageRoute(
-                                        child: CreateAccountScreen(),
+                                        child: const CreateAccountScreen(),
                                         route: CreateAccountScreen.routeName));
                               },
                               child: const Text(

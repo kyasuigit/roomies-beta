@@ -409,7 +409,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             }
                           },
                         ),
-                        SizedBox(height: deviceSize.height * 0.05),
+                        SizedBox(height: deviceSize.height * 0.02),
                         ElevatedButton(
                           style: ButtonStyle(
                             minimumSize: MaterialStateProperty.all(
