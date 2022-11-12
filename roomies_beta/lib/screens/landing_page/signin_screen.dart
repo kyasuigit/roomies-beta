@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
@@ -6,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../transitions/sliding_page_route.dart';
 import './create_account_screen.dart';
 import './forgot_password_page.dart';
+import '../../providers/app_user.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -30,7 +32,11 @@ class _SigninScreenState extends State<SigninScreen> {
       showDialog(
         context: context,
         builder: (context) {
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: Lottie.network(
+              'https://assets8.lottiefiles.com/packages/lf20_cl6skp0o.json',
+            ),
+          );
         },
       );
 
@@ -40,6 +46,8 @@ class _SigninScreenState extends State<SigninScreen> {
       );
 
       if (!mounted) return;
+
+      updateUserData();
 
       Navigator.of(context).pop();
       Navigator.of(context).pop();
@@ -62,6 +70,21 @@ class _SigninScreenState extends State<SigninScreen> {
       }
       showErrorBox(context, errorMsg);
     }
+  }
+
+  void updateUserData() async {
+    final user = Provider.of<AppUser>(context, listen: false);
+    var docSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
+
+    user.setDisplayName(userData['displayName']);
+    user.setEmail(userData['email']);
+    user.setIsFirstTimeUser(userData['isFirstTimeUser']);
+    user.setUserId(FirebaseAuth.instance.currentUser!.uid);
   }
 
   void showErrorBox(BuildContext ctx, String errorMsg) {

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../widgets/home_screen/overview_widget.dart';
 import '../widgets/home_screen/roommates_widget.dart';
-import '../providers/user.dart';
+import '../providers/app_user.dart';
 import '../providers/house.dart';
 import '../widgets/home_screen/ad_card.dart';
 
@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<User>(context);
+    final user = Provider.of<AppUser>(context);
     return SingleChildScrollView(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),

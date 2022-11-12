@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 
 import '../../transitions/sliding_page_route.dart';
 import './signin_screen.dart';
+import '../../providers/app_user.dart';
 
 class CreateAccountScreen extends StatefulWidget {
   const CreateAccountScreen({super.key});
@@ -34,7 +37,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: _email, password: _password);
 
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set(
+        {
+          'email': FirebaseAuth.instance.currentUser!.email,
+          'isFirstTimeUser': true,
+        },
+      );
+
       if (!mounted) return;
+
+      final user = Provider.of<AppUser>(context, listen: false);
+      user.setUserId(FirebaseAuth.instance.currentUser!.uid);
 
       Navigator.of(context).pop();
       Navigator.of(context).pop();

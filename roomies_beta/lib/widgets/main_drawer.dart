@@ -127,6 +127,7 @@ class MainDrawer extends StatelessWidget {
                   );
                 },
               );
+
               await FirebaseAuth.instance.signOut();
 
               if (!mounted) return;

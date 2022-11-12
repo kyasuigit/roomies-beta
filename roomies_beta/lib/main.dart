@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 import 'firebase_options.dart';
 
-import 'providers/user.dart';
+import 'providers/app_user.dart';
 import './screens/tabs_screen.dart';
 import './screens/landing_page/create_account_screen.dart';
 import './screens/landing_page/signin_screen.dart';
@@ -53,30 +53,18 @@ class MyApp extends StatefulWidget {
     },
   );
 
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  late User appUser;
-
-  @override
-  void initState() {
-    var uuid = Uuid();
-    String uniqueId = uuid.v4();
-
-    appUser = User('kyasui', uniqueId, 'Kohei');
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => appUser),
+        ChangeNotifierProvider(create: (ctx) => AppUser('', '', '')),
       ],
       child: MaterialApp(
         title: 'Roomies',
