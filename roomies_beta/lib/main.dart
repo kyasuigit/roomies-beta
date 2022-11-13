@@ -8,6 +8,7 @@ import 'providers/app_user.dart';
 import './screens/tabs_screen.dart';
 import './screens/landing_page/create_account_screen.dart';
 import './screens/landing_page/signin_screen.dart';
+import './screens/introduction_screens/introduction_screen.dart';
 import './main_page.dart';
 
 void main() async {
@@ -79,10 +80,12 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
         ),
-        home: MainPage(),
+        home: const MainPage(),
         routes: {
-          SigninScreen.routeName: (context) => SigninScreen(),
-          CreateAccountScreen.routeName: (context) => CreateAccountScreen(),
+          SigninScreen.routeName: (context) => const SigninScreen(),
+          CreateAccountScreen.routeName: (context) =>
+              const CreateAccountScreen(),
+          IntroductionScreen.routeName: (context) => const IntroductionScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => const TabsScreen());

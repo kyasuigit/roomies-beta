@@ -5,7 +5,7 @@ class AppUser with ChangeNotifier {
   String _email = '';
   String _userId = '';
   String _displayName = '';
-  bool _isFirstTimeUser = true;
+  bool _isFirstTimeUser = false;
 
   AppUser(email, userId, displayName) {
     _email = email;

@@ -230,10 +230,10 @@ class _SigninScreenState extends State<SigninScreen> {
                             Padding(
                               padding: const EdgeInsets.only(left: 8.0),
                               child: Text(
-                                "Login to continue!",
+                                "Welcome back!",
                                 textAlign: TextAlign.start,
                                 style: TextStyle(
-                                  color: Colors.grey.shade400,
+                                  color: Colors.grey.shade500,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
@@ -241,7 +241,8 @@ class _SigninScreenState extends State<SigninScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: deviceSize.height * 0.04),
+
+                        SizedBox(height: deviceSize.height * 0.02),
 
                         // EMAIL FIELD
                         TextFormField(
@@ -364,6 +365,15 @@ class _SigninScreenState extends State<SigninScreen> {
                               signIn(context);
                             }
                           },
+                        ),
+                        SizedBox(height: deviceSize.height * 0.02),
+                        Container(
+                          height: deviceSize.height * 0.001,
+                          width: deviceSize.width * 0.7,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(249, 160, 63, 0.5),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                         ),
                         SizedBox(height: deviceSize.height * 0.02),
                         ElevatedButton(

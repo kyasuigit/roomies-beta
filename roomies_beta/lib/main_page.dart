@@ -18,9 +18,7 @@ class MainPage extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return user.isFirstTimeUser
-              ? const IntroductionScreen()
-              : const TabsScreen();
+          return const TabsScreen();
         } else {
           return AuthScreen();
         }

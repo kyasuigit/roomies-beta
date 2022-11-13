@@ -20,6 +20,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   bool inputError = false;
   final formKey = GlobalKey<FormState>();
 
+  String _name = '';
   String _email = '';
   String _password = '';
 
@@ -44,6 +45,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         {
           'email': FirebaseAuth.instance.currentUser!.email,
           'isFirstTimeUser': true,
+          'displayName': _name,
         },
       );
 
@@ -51,6 +53,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
       final user = Provider.of<AppUser>(context, listen: false);
       user.setUserId(FirebaseAuth.instance.currentUser!.uid);
+      user.setDisplayName(_name);
+      user.setIsFirstTimeUser(true);
 
       Navigator.of(context).pop();
       Navigator.of(context).pop();
@@ -124,6 +128,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final emailFocus = FocusNode();
     final passwordFocus = FocusNode();
     final confirmPasswordFocus = FocusNode();
     final deviceSize = MediaQuery.of(context).size;
@@ -169,7 +174,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           right: deviceSize.width * 0.055,
                           bottom: deviceSize.height * 0.04),
                       child: const Text(
-                        'Create \nAccount',
+                        'Create\nAccount',
                         style: TextStyle(
                           fontSize: 42,
                           fontWeight: FontWeight.bold,
@@ -236,6 +241,65 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         ),
                         SizedBox(height: deviceSize.height * 0.03),
 
+                        // NAME FIELD
+                        TextFormField(
+                          onSaved: (value) => _name = value as String,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Enter a name';
+                            } else {
+                              return null;
+                            }
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 16.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: BorderSide.none,
+                            ),
+                            labelText: 'Name',
+                            labelStyle: const TextStyle(
+                              fontSize: 15,
+                              color: Color.fromRGBO(206, 209, 216, 1),
+                            ),
+                            filled: true,
+                            fillColor: const Color.fromRGBO(237, 240, 247, 0.7),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(249, 160, 63, 1),
+                                width: 1.5,
+                              ),
+                            ),
+                            floatingLabelStyle: const TextStyle(
+                              color: Color.fromRGBO(249, 160, 63, 1),
+                              fontSize: 20,
+                            ),
+                            errorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: BorderSide(
+                                color: Colors.red.shade900,
+                                width: 2,
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(25),
+                              borderSide: BorderSide(
+                                color: Colors.red.shade900,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          style: const TextStyle(fontSize: 15),
+                          textAlignVertical: TextAlignVertical.center,
+                          textInputAction: TextInputAction.next,
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).requestFocus(emailFocus);
+                          },
+                        ),
+
+                        SizedBox(height: deviceSize.height * 0.02),
                         // EMAIL FIELD
                         TextFormField(
                           onSaved: (value) => _email = value as String,
@@ -248,6 +312,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               return null;
                             }
                           },
+                          focusNode: emailFocus,
                           decoration: InputDecoration(
                             contentPadding: const EdgeInsets.symmetric(
                                 vertical: 15, horizontal: 16.0),
@@ -426,6 +491,15 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           },
                         ),
                         SizedBox(height: deviceSize.height * 0.02),
+                        Container(
+                          height: deviceSize.height * 0.001,
+                          width: deviceSize.width * 0.7,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(249, 160, 63, 0.5),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        SizedBox(height: deviceSize.height * 0.02),
                         ElevatedButton(
                           style: ButtonStyle(
                             minimumSize: MaterialStateProperty.all(
@@ -459,7 +533,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
-                        SizedBox(height: deviceSize.height * 0.22),
+                        SizedBox(height: deviceSize.height * 0.11),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

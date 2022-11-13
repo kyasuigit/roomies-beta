@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/app_user.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -54,9 +57,16 @@ class MainDrawer extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                Text(
-                  style: Theme.of(context).textTheme.titleMedium,
-                  "User",
+                Consumer<AppUser>(
+                  builder: (
+                    _,
+                    userName,
+                    __,
+                  ) =>
+                      Text(
+                    style: Theme.of(context).textTheme.titleMedium,
+                    userName.getDisplayName,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {},
@@ -127,7 +137,6 @@ class MainDrawer extends StatelessWidget {
                   );
                 },
               );
-
               await FirebaseAuth.instance.signOut();
 
               if (!mounted) return;

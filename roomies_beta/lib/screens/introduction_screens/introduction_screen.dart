@@ -12,6 +12,7 @@ import '../../transitions/sliding_page_route.dart';
 import '../../providers/app_user.dart';
 
 class IntroductionScreen extends StatefulWidget {
+  static const routeName = '/introduction_screen';
   const IntroductionScreen({super.key});
 
   @override
@@ -21,6 +22,21 @@ class IntroductionScreen extends StatefulWidget {
 class _IntroductionScreenState extends State<IntroductionScreen> {
   final PageController _controller = PageController();
   bool isLastPage = false;
+
+  void updateUserData() async {
+    final user = Provider.of<AppUser>(context, listen: false);
+    var docSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
+
+    user.setDisplayName(userData['displayName']);
+    user.setEmail(userData['email']);
+    user.setIsFirstTimeUser(userData['isFirstTimeUser']);
+    user.setUserId(FirebaseAuth.instance.currentUser!.uid);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +77,9 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                   FirebaseFirestore.instance
                       .collection('users')
                       .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .set({'isFirstTimeUser': false});
-                  Navigator.of(context).pushReplacement(
-                    SlidingPageRoute(
-                        child: const TabsScreen(), route: TabsScreen.routeName),
-                  );
+                      .update({'isFirstTimeUser': false});
+
+                  updateUserData();
                 } else {
                   _controller.nextPage(
                       duration: const Duration(milliseconds: 400),
