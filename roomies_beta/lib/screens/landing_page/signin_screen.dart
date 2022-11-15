@@ -169,7 +169,7 @@ class _SigninScreenState extends State<SigninScreen> {
                     Padding(
                       padding: EdgeInsets.only(
                           left: deviceSize.width * 0.055,
-                          bottom: deviceSize.height * 0.04),
+                          bottom: deviceSize.height * 0.06),
                       child: const Text(
                         "Sign in",
                         style: TextStyle(
@@ -263,7 +263,17 @@ class _SigninScreenState extends State<SigninScreen> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Email',
+                            label: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.mail,
+                                  color: Color.fromRGBO(206, 209, 216, 1),
+                                  size: 20,
+                                ),
+                                Text('  Email')
+                              ],
+                            ),
                             labelStyle: const TextStyle(
                               fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),
@@ -322,7 +332,17 @@ class _SigninScreenState extends State<SigninScreen> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Password',
+                            label: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.lock,
+                                  color: Color.fromRGBO(206, 209, 216, 1),
+                                  size: 20,
+                                ),
+                                Text('  Password')
+                              ],
+                            ),
                             labelStyle: const TextStyle(
                               fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),

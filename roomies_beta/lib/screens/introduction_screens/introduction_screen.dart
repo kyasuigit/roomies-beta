@@ -25,21 +25,12 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
 
   void updateUserData() async {
     final user = Provider.of<AppUser>(context, listen: false);
-    var docSnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
-
-    user.setDisplayName(userData['displayName']);
-    user.setEmail(userData['email']);
-    user.setIsFirstTimeUser(userData['isFirstTimeUser']);
-    user.setUserId(FirebaseAuth.instance.currentUser!.uid);
+    user.setIsFirstTimeUser(false);
   }
 
   @override
   Widget build(BuildContext context) {
+    final deviceSize = MediaQuery.of(context).size;
     final user = Provider.of<AppUser>(context);
     return Scaffold(
       body: Stack(
@@ -70,38 +61,67 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
           ),
           Container(
             alignment: const Alignment(0.8, 0.92),
-            child: GestureDetector(
-              onTap: () {
-                if (isLastPage) {
-                  user.setIsFirstTimeUser(false);
-                  FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .update({'isFirstTimeUser': false});
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: deviceSize.width * 0.06),
+                  child: GestureDetector(
+                    onTap: () {
+                      user.setIsFirstTimeUser(false);
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(FirebaseAuth.instance.currentUser!.uid)
+                          .update({'isFirstTimeUser': false});
 
-                  updateUserData();
-                } else {
-                  _controller.nextPage(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeIn);
-                }
-              },
-              child: isLastPage
-                  ? const Text(
-                      'done',
-                      style: TextStyle(
-                        color: Color.fromRGBO(222, 110, 75, 0.8),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  : const Text(
-                      'next',
+                      updateUserData();
+                    },
+                    child: const Text(
+                      'skip',
                       style: TextStyle(
                         color: Color.fromRGBO(249, 160, 63, 1),
                         fontSize: 16,
                       ),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: deviceSize.width * 0.06),
+                  child: GestureDetector(
+                    onTap: () {
+                      if (isLastPage) {
+                        user.setIsFirstTimeUser(false);
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .update({'isFirstTimeUser': false});
+
+                        updateUserData();
+                      } else {
+                        _controller.nextPage(
+                            duration: const Duration(milliseconds: 400),
+                            curve: Curves.easeIn);
+                      }
+                    },
+                    child: isLastPage
+                        ? const Text(
+                            'done',
+                            style: TextStyle(
+                              color: Color.fromRGBO(222, 110, 75, 0.8),
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : const Text(
+                            'next',
+                            style: TextStyle(
+                              color: Color.fromRGBO(249, 160, 63, 1),
+                              fontSize: 16,
+                            ),
+                          ),
+                  ),
+                ),
+              ],
             ),
           )
         ],

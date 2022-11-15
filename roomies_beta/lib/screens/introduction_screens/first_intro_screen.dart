@@ -43,6 +43,7 @@ class FirstIntroScreen extends StatelessWidget {
               ],
             ),
             height: deviceSize.height * 0.55,
+            width: deviceSize.width * 0.98,
           ),
         )
       ],

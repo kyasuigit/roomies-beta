@@ -106,7 +106,7 @@ class AuthScreen extends StatelessWidget {
                               route: CreateAccountScreen.routeName));
                         },
                         child: const Text(
-                          "Create an Account",
+                          "Create an account",
                           style: TextStyle(
                             fontSize: 16,
                           ),

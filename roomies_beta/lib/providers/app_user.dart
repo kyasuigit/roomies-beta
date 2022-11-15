@@ -45,5 +45,6 @@ class AppUser with ChangeNotifier {
 
   void setIsFirstTimeUser(bool isFirstTimeUser) {
     _isFirstTimeUser = isFirstTimeUser;
+    notifyListeners();
   }
 }

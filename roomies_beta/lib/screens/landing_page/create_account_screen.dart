@@ -53,6 +53,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
       final user = Provider.of<AppUser>(context, listen: false);
       user.setUserId(FirebaseAuth.instance.currentUser!.uid);
+      user.setEmail(_email);
       user.setDisplayName(_name);
       user.setIsFirstTimeUser(true);
 
@@ -246,7 +247,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                           onSaved: (value) => _name = value as String,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return 'Enter a name';
+                              return 'Please enter a name';
                             } else {
                               return null;
                             }
@@ -258,10 +259,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Name',
                             labelStyle: const TextStyle(
                               fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),
+                            ),
+                            label: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.person,
+                                  color: Color.fromRGBO(206, 209, 216, 1),
+                                  size: 20,
+                                ),
+                                Text('  Name')
+                              ],
                             ),
                             filled: true,
                             fillColor: const Color.fromRGBO(237, 240, 247, 0.7),
@@ -320,7 +331,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Email',
+                            label: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.mail,
+                                  color: Color.fromRGBO(206, 209, 216, 1),
+                                  size: 20,
+                                ),
+                                Text('  Email')
+                              ],
+                            ),
                             labelStyle: const TextStyle(
                               fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),
@@ -384,7 +405,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Password',
+                            label: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.lock,
+                                  color: Color.fromRGBO(206, 209, 216, 1),
+                                  size: 20,
+                                ),
+                                Text('  Password')
+                              ],
+                            ),
                             labelStyle: const TextStyle(
                               fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),
@@ -447,7 +478,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                               borderRadius: BorderRadius.circular(25),
                               borderSide: BorderSide.none,
                             ),
-                            labelText: 'Confirm Password',
+                            label: Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.center,
+                              children: const [
+                                Icon(
+                                  Icons.key,
+                                  color: Color.fromRGBO(206, 209, 216, 1),
+                                  size: 20,
+                                ),
+                                Text('  Confirm Password')
+                              ],
+                            ),
                             labelStyle: const TextStyle(
                               fontSize: 15,
                               color: Color.fromRGBO(206, 209, 216, 1),

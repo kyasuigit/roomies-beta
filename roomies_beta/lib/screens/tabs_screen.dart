@@ -40,38 +40,6 @@ class _TabsScreenState extends State<TabsScreen> {
         ? const IntroductionScreen()
         : Scaffold(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  const Icon(Icons.location_on),
-                  const Text(
-                    '38 Beverley',
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(30),
-                    onTap: () {},
-                    child: const Icon(
-                      Icons.expand_more,
-                    ),
-                  ),
-                ],
-              ),
-              centerTitle: true,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications_none),
-                ),
-              ],
-            ),
-            drawer: const Drawer(
-              child: MainDrawer(),
-            ),
-            body: _pages[_selectedPageIndex],
             bottomNavigationBar: BottomNavigationBar(
               iconSize: 24,
               onTap: _selectPage,
@@ -107,6 +75,44 @@ class _TabsScreenState extends State<TabsScreen> {
                   label: 'Calendar',
                 ),
               ],
+            ),
+            drawer: const Drawer(
+              child: MainDrawer(),
+            ),
+            body: SafeArea(
+              child: NestedScrollView(
+                headerSliverBuilder: ((context, innerBoxIsScrolled) => [
+                      SliverAppBar(
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Icon(Icons.location_on),
+                            const Text(
+                              '38 Beverley',
+                              style: TextStyle(fontSize: 18),
+                            ),
+                            InkWell(
+                              borderRadius: BorderRadius.circular(30),
+                              onTap: () {},
+                              child: const Icon(
+                                Icons.expand_more,
+                              ),
+                            ),
+                          ],
+                        ),
+                        centerTitle: true,
+                        backgroundColor: Colors.white,
+                        elevation: 0,
+                        actions: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.notifications_none),
+                          ),
+                        ],
+                      ),
+                    ]),
+                body: _pages[_selectedPageIndex],
+              ),
             ),
           );
   }
