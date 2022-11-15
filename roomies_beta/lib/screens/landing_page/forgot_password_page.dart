@@ -178,7 +178,15 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           textInputAction: TextInputAction.next,
                           onFieldSubmitted: (_) {},
                         ),
-
+                        SizedBox(height: deviceSize.height * 0.02),
+                        Container(
+                          height: deviceSize.height * 0.001,
+                          width: deviceSize.width * 0.7,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(249, 160, 63, 0.5),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
                         SizedBox(height: deviceSize.height * 0.02),
                         ElevatedButton(
                           style: ButtonStyle(

@@ -65,7 +65,7 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: deviceSize.width * 0.06),
+                  padding: EdgeInsets.only(left: deviceSize.width * 0.07),
                   child: GestureDetector(
                     onTap: () {
                       user.setIsFirstTimeUser(false);
@@ -79,14 +79,15 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                     child: const Text(
                       'skip',
                       style: TextStyle(
-                        color: Color.fromRGBO(249, 160, 63, 1),
+                        color: Colors.white,
                         fontSize: 16,
+                        fontFamily: 'Gotham',
                       ),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(right: deviceSize.width * 0.06),
+                  padding: EdgeInsets.only(right: deviceSize.width * 0.07),
                   child: GestureDetector(
                     onTap: () {
                       if (isLastPage) {
@@ -107,16 +108,18 @@ class _IntroductionScreenState extends State<IntroductionScreen> {
                         ? const Text(
                             'done',
                             style: TextStyle(
-                              color: Color.fromRGBO(222, 110, 75, 0.8),
+                              color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
+                              fontFamily: 'Gotham',
                             ),
                           )
                         : const Text(
                             'next',
                             style: TextStyle(
-                              color: Color.fromRGBO(249, 160, 63, 1),
+                              color: Colors.white,
                               fontSize: 16,
+                              fontFamily: 'Gotham',
                             ),
                           ),
                   ),
