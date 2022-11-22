@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:roomies_beta/transitions/sliding_page_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import './home_screen.dart';
 import './chores_screen.dart';
@@ -9,6 +12,7 @@ import '../providers/app_user.dart';
 import 'calendar_screen.dart';
 import '../widgets/main_drawer.dart';
 import './introduction_screens/introduction_screen.dart';
+import './houses_screen/my_houses_screen.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs';
@@ -31,6 +35,30 @@ class _TabsScreenState extends State<TabsScreen> {
 
   void _selectPage(int index) {
     setState(() => _selectedPageIndex = index);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        _getDatabaseUserdata();
+      },
+    );
+  }
+
+  _getDatabaseUserdata() async {
+    final user = Provider.of<AppUser>(context, listen: false);
+
+    var docSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    var userData = docSnapshot.data();
+
+    user.fetchUserData(userData as Map<String, dynamic>);
   }
 
   @override
@@ -86,16 +114,24 @@ class _TabsScreenState extends State<TabsScreen> {
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            const Icon(Icons.location_on),
-                            const Text(
-                              '38 Beverley',
-                              style: TextStyle(fontSize: 18),
+                            Text(
+                              user.getCurrentHouse.getHouseName,
+                              style: const TextStyle(fontSize: 18),
                             ),
-                            InkWell(
-                              borderRadius: BorderRadius.circular(30),
-                              onTap: () {},
-                              child: const Icon(
-                                Icons.expand_more,
+                            Container(
+                              margin: const EdgeInsets.only(left: 3.0),
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(30),
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    SlidingPageRoute(
+                                        child: const MyHousesScreen(),
+                                        route: MyHousesScreen.routeName),
+                                  );
+                                },
+                                child: const Icon(
+                                  Icons.expand_more,
+                                ),
                               ),
                             ),
                           ],

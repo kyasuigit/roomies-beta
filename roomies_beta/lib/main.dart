@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:roomies_beta/screens/houses_screen/create_house_screen.dart';
 import 'package:uuid/uuid.dart';
 import 'firebase_options.dart';
 
@@ -10,6 +11,7 @@ import './screens/landing_page/create_account_screen.dart';
 import './screens/landing_page/signin_screen.dart';
 import './screens/introduction_screens/introduction_screen.dart';
 import './main_page.dart';
+import './screens/houses_screen/my_houses_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,7 +20,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -65,7 +67,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => AppUser('', '', '')),
+        ChangeNotifierProvider(create: (ctx) => AppUser()),
       ],
       child: MaterialApp(
         title: 'Roomies',
@@ -86,6 +88,8 @@ class _MyAppState extends State<MyApp> {
           CreateAccountScreen.routeName: (context) =>
               const CreateAccountScreen(),
           IntroductionScreen.routeName: (context) => const IntroductionScreen(),
+          MyHousesScreen.routeName: (context) => const MyHousesScreen(),
+          CreateHouseScreen.routeName: (context) => CreateHouseScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => const TabsScreen());

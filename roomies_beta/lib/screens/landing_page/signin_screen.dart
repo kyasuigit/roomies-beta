@@ -33,8 +33,12 @@ class _SigninScreenState extends State<SigninScreen> {
         context: context,
         builder: (context) {
           return Center(
-            child: Lottie.network(
-              'https://assets8.lottiefiles.com/packages/lf20_cl6skp0o.json',
+            child: SizedBox(
+              height: 100,
+              width: 100,
+              child: Lottie.network(
+                'https://assets8.lottiefiles.com/packages/lf20_cl6skp0o.json',
+              ),
             ),
           );
         },
@@ -81,10 +85,7 @@ class _SigninScreenState extends State<SigninScreen> {
 
     Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
 
-    user.setDisplayName(userData['displayName']);
-    user.setEmail(userData['email']);
-    user.setIsFirstTimeUser(userData['isFirstTimeUser']);
-    user.setUserId(FirebaseAuth.instance.currentUser!.uid);
+    user.fetchUserData({...userData});
   }
 
   void showErrorBox(BuildContext ctx, String errorMsg) {
@@ -157,27 +158,34 @@ class _SigninScreenState extends State<SigninScreen> {
             ),
           ),
           Align(
-            alignment: Alignment.topCenter,
+            alignment: const Alignment(0, -0.925),
             child: SafeArea(
               child: SizedBox(
                 height: deviceSize.height * 0.17,
                 width: deviceSize.width,
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: deviceSize.width * 0.055,
-                          bottom: deviceSize.height * 0.06),
-                      child: const Text(
-                        "Sign in",
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: deviceSize.width * 0.055,
+                            bottom: deviceSize.height * 0.06,
+                            top: deviceSize.height * 0.0,
+                          ),
+                          child: const Text(
+                            "Sign in",
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                     Container(
                       margin: EdgeInsets.only(right: deviceSize.width * 0.03),
@@ -411,7 +419,7 @@ class _SigninScreenState extends State<SigninScreen> {
                             foregroundColor:
                                 MaterialStateProperty.all(Colors.white),
                             backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(222, 110, 75, 0.8),
+                              const Color.fromRGBO(249, 160, 63, 1),
                             ),
                             shadowColor: MaterialStateProperty.all(Colors.grey),
                             elevation: MaterialStateProperty.all(2),
@@ -439,7 +447,7 @@ class _SigninScreenState extends State<SigninScreen> {
                           child: const Text(
                             "Forgot password?",
                             style: TextStyle(
-                              color: Color.fromRGBO(222, 110, 75, 0.7),
+                              color: Color.fromRGBO(249, 160, 63, 1),
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -466,7 +474,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               child: const Text(
                                 'Sign up!',
                                 style: TextStyle(
-                                  color: Color.fromRGBO(222, 110, 75, 0.8),
+                                  color: Color.fromRGBO(249, 160, 63, 1),
                                 ),
                               ),
                             ),

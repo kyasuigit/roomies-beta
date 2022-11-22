@@ -203,7 +203,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                             foregroundColor:
                                 MaterialStateProperty.all(Colors.white),
                             backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(222, 110, 75, 0.8),
+                              const Color.fromRGBO(249, 160, 63, 1),
                             ),
                             shadowColor: MaterialStateProperty.all(Colors.grey),
                             elevation: MaterialStateProperty.all(2),

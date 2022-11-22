@@ -196,8 +196,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20)),
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
+                ),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -556,7 +557,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                             foregroundColor:
                                 MaterialStateProperty.all(Colors.white),
                             backgroundColor: MaterialStateProperty.all(
-                              const Color.fromRGBO(222, 110, 75, 0.8),
+                              const Color.fromRGBO(249, 160, 63, 1),
                             ),
                             shadowColor: MaterialStateProperty.all(Colors.grey),
                             elevation: MaterialStateProperty.all(2),

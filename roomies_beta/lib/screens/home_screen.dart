@@ -19,6 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   bool roommatesIsMinimized = false;
 
   @override
+  void initState() {
+    setState(() {});
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final user = Provider.of<AppUser>(context);
     return SingleChildScrollView(

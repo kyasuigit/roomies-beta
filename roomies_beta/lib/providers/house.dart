@@ -2,17 +2,16 @@ import 'app_user.dart';
 import 'package:flutter/foundation.dart';
 
 class House with ChangeNotifier {
-  late final String _houseId;
+  String _houseId = '';
   String _houseName = '';
   final Map<String, AppUser> _users = {};
 
-  House(houseId, houseName) {
-    _houseId = houseId;
-    _houseName = houseName;
-  }
-
   String get getHouseId {
     return _houseId;
+  }
+
+  void setHouseId(String id) {
+    _houseId = id;
   }
 
   String get getHouseName {

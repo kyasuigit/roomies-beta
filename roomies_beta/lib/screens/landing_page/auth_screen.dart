@@ -64,15 +64,18 @@ class AuthScreen extends StatelessWidget {
                           foregroundColor:
                               MaterialStateProperty.all(Colors.white),
                           backgroundColor: MaterialStateProperty.all(
-                            const Color.fromRGBO(222, 110, 75, 0.8),
+                            const Color.fromRGBO(249, 160, 63, 1),
                           ),
                           shadowColor: MaterialStateProperty.all(Colors.grey),
                           elevation: MaterialStateProperty.all(2),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(SlidingPageRoute(
-                              child: SigninScreen(),
-                              route: SigninScreen.routeName));
+                          Navigator.of(context).push(
+                            SlidingPageRoute(
+                              child: const SigninScreen(),
+                              route: SigninScreen.routeName,
+                            ),
+                          );
                         },
                         child: const Text(
                           "Sign In",
@@ -122,7 +125,7 @@ class AuthScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 25,
                           backgroundColor: Color.fromRGBO(249, 160, 63, 1),
                         ),
