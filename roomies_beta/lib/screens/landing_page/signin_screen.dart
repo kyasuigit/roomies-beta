@@ -77,15 +77,8 @@ class _SigninScreenState extends State<SigninScreen> {
   }
 
   void updateUserData() async {
-    final user = Provider.of<AppUser>(context, listen: false);
-    var docSnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
-
-    user.fetchUserData({...userData});
+    final user = Provider.of(context, listen: false);
+    user.fetchUserData();
   }
 
   void showErrorBox(BuildContext ctx, String errorMsg) {

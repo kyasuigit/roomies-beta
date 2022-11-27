@@ -60,12 +60,12 @@ class MainDrawer extends StatelessWidget {
                 Consumer<AppUser>(
                   builder: (
                     _,
-                    userName,
+                    user,
                     __,
                   ) =>
                       Text(
                     style: Theme.of(context).textTheme.titleMedium,
-                    userName.getDisplayName,
+                    user.getDisplayName,
                   ),
                 ),
                 TextButton(

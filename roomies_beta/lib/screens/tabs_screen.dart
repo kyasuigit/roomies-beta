@@ -13,6 +13,7 @@ import 'calendar_screen.dart';
 import '../widgets/main_drawer.dart';
 import './introduction_screens/introduction_screen.dart';
 import './houses_screen/my_houses_screen.dart';
+import '../providers/house.dart';
 
 class TabsScreen extends StatefulWidget {
   static const routeName = '/tabs';
@@ -48,17 +49,9 @@ class _TabsScreenState extends State<TabsScreen> {
     );
   }
 
-  _getDatabaseUserdata() async {
+  _getDatabaseUserdata() {
     final user = Provider.of<AppUser>(context, listen: false);
-
-    var docSnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
-
-    var userData = docSnapshot.data();
-
-    user.fetchUserData(userData as Map<String, dynamic>);
+    user.fetchUserData();
   }
 
   @override
@@ -115,7 +108,7 @@ class _TabsScreenState extends State<TabsScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              user.getCurrentHouse.getHouseName,
+                              Provider.of<House>(context).getHouseName,
                               style: const TextStyle(fontSize: 18),
                             ),
                             Container(

@@ -1,10 +1,15 @@
-import 'app_user.dart';
-import 'package:flutter/foundation.dart';
+import './app_user.dart';
 
-class House with ChangeNotifier {
+class House {
   String _houseId = '';
   String _houseName = '';
-  final Map<String, AppUser> _users = {};
+  List<AppUser> _users = [];
+
+  House(String houseId, String houseName, List<AppUser> users) {
+    _houseId = houseId;
+    _houseName = houseName;
+    _users = users;
+  }
 
   String get getHouseId {
     return _houseId;
@@ -22,12 +27,11 @@ class House with ChangeNotifier {
     _houseName = newHouseName;
   }
 
-  Map<String, AppUser> get getUsers {
-    return {..._users};
+  List<AppUser> get getUsers {
+    return [..._users];
   }
 
-  void addUser(String id, AppUser newUser) {
-    _users.putIfAbsent(id, () => newUser);
-    notifyListeners();
+  void addUser(AppUser newUser) {
+    _users.add(newUser);
   }
 }

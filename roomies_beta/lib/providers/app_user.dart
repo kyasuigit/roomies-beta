@@ -9,8 +9,15 @@ class AppUser with ChangeNotifier {
   String _userId = '';
   String _displayName = '';
   bool _isFirstTimeUser = false;
-  Map<String, House> _houses = {};
-  House _currentHouse = House();
+  String _currentHouse = 'placeholder';
+
+  AppUser(email, userId, displayName, isFirstTimeUser, currentHouse) {
+    _email = email;
+    _userId = userId;
+    _displayName = displayName;
+    _isFirstTimeUser = isFirstTimeUser;
+    _currentHouse = currentHouse;
+  }
 
   String get getUsername {
     return _email;
@@ -47,49 +54,33 @@ class AppUser with ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchUserData(Map<String, dynamic> data) {
+  void fetchUserData() async {
+    var docSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    Map<String, dynamic> userData = docSnapshot.data() as Map<String, dynamic>;
+
     _userId = FirebaseAuth.instance.currentUser!.uid;
-    _email = data['email'];
-    _displayName = data['displayName'];
-    _isFirstTimeUser = data['isFirstTimeUser'];
-    _houses = data['houses'];
+    _email = userData['email'];
+    _displayName = userData['displayName'];
+    _isFirstTimeUser = userData['isFirstTimeUser'];
+    _currentHouse = userData['currentHouse'];
 
     notifyListeners();
   }
 
-  Map<String, House> get getListOfHouses {
-    return {..._houses};
-  }
-
-  House get getCurrentHouse {
+  String get getCurrentHouse {
     return _currentHouse;
   }
 
-  void setCurrentHouse(House currentHouse) {
+  void setCurrentHouse(String currentHouse) {
     _currentHouse = currentHouse;
     FirebaseFirestore.instance
         .collection('users')
         .doc(_userId)
-        .update({'currentHouse': currentHouse.getHouseId});
-    notifyListeners();
-  }
-
-  void removeHouse(String houseId) {
-    _houses.removeWhere((key, value) => (key == houseId));
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(_userId)
-        .update({'houses': _houses.keys.toList()});
-    notifyListeners();
-  }
-
-  void addHouse(String houseId, House newHouse) {
-    _houses.putIfAbsent(houseId, () => newHouse);
-
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(_userId)
-        .update({'houses': _houses.keys.toList()});
+        .update({'currentHouse': _currentHouse});
     notifyListeners();
   }
 }

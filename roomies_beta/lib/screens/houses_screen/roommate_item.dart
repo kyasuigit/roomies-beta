@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../models/size_config.dart';
+import '../../providers/app_user.dart';
 import '../../providers/house.dart';
 
-class HouseItem extends StatelessWidget {
-  final House houseComponent;
+class RoommateItem extends StatelessWidget {
+  final AppUser roommate;
 
-  const HouseItem({super.key, required this.houseComponent});
+  const RoommateItem({super.key, required this.roommate});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class HouseItem extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: Container(
         margin: EdgeInsets.only(bottom: SizeConfig.screenHeight * 0.03),
-        width: SizeConfig.screenWidth * 0.85,
+        width: SizeConfig.screenWidth * 0.9,
         height: SizeConfig.screenHeight * 0.12,
         decoration: BoxDecoration(
           gradient: const LinearGradient(
@@ -38,7 +39,7 @@ class HouseItem extends StatelessWidget {
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.screenWidth * 0.02,
+              horizontal: SizeConfig.screenWidth * 0.03,
               vertical: SizeConfig.screenHeight * 0.02),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,13 +54,14 @@ class HouseItem extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: SizeConfig.screenWidth * 0.02,
+                width: SizeConfig.screenWidth * 0.03,
               ),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    houseComponent.getHouseName,
+                    roommate.getDisplayName,
                     style: TextStyle(
                       color: const Color(0xFFFFF7EB),
                       fontFamily: 'Gotham',

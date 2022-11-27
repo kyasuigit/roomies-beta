@@ -2,10 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:roomies_beta/screens/houses_screen/create_house_screen.dart';
-import 'package:uuid/uuid.dart';
 import 'firebase_options.dart';
 
-import 'providers/app_user.dart';
+import './models/database.dart';
+import './models/size_config.dart';
+import './providers/house.dart';
+import './providers/app_user.dart';
 import './screens/tabs_screen.dart';
 import './screens/landing_page/create_account_screen.dart';
 import './screens/landing_page/signin_screen.dart';
@@ -64,11 +66,21 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => AppUser()),
+        ChangeNotifierProvider(
+          create: (ctx) => AppUser('', '', '', false, ''),
+        ),
       ],
+      builder: (context, child) => StreamProvider.value(
+        value: Database.getHouseData(
+            Provider.of<AppUser>(context).getCurrentHouse),
+        initialData: House('', '', []),
+        catchError: (_, error) => House(error.toString(), "Loading...", []),
+        child: child,
+      ),
       child: MaterialApp(
         title: 'Roomies',
         theme: ThemeData(
@@ -89,7 +101,7 @@ class _MyAppState extends State<MyApp> {
               const CreateAccountScreen(),
           IntroductionScreen.routeName: (context) => const IntroductionScreen(),
           MyHousesScreen.routeName: (context) => const MyHousesScreen(),
-          CreateHouseScreen.routeName: (context) => CreateHouseScreen(),
+          CreateHouseScreen.routeName: (context) => const CreateHouseScreen(),
         },
         onUnknownRoute: (settings) {
           return MaterialPageRoute(builder: (ctx) => const TabsScreen());

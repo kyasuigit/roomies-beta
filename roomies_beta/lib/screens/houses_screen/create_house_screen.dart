@@ -38,14 +38,7 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
       },
     );
 
-    House newHouse = House();
-
-    newHouse.setHouseId(docSnapshot.id);
-    newHouse.setHouseName(_houseName);
-    newHouse.addUser(user.getUserId, user);
-
-    user.setCurrentHouse(newHouse);
-    user.addHouse(newHouse.getHouseId, newHouse);
+    user.setCurrentHouse(docSnapshot.id);
 
     if (!mounted) return;
     Navigator.of(context).pop();
@@ -101,24 +94,22 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child: SingleChildScrollView(
-              child: Container(
-                height: deviceSize.height * 0.65,
-                decoration: BoxDecoration(
-                  color: const Color(0xFFFFF7EB),
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 8,
-                      blurRadius: 20,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
+            child: Container(
+              height: deviceSize.height * 0.65,
+              decoration: BoxDecoration(
+                color: const Color(0xFFFFF7EB),
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 8,
+                    blurRadius: 20,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
               ),
             ),
           ),
@@ -309,7 +300,7 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
                         fontFamily: 'Gotham',
                         fontSize: 3 * SizeConfig.blockSizeVertical,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF8A6094),
+                        color: const Color(0xFFFF8885),
                       ),
                     ),
                   ),
