@@ -44,6 +44,7 @@ dependencies:
   cloud_firestore: ^4.0.5
   smooth_page_indicator: ^1.0.0+2
   flutter_svg: ^1.1.6
+  hidden_drawer_menu: ^3.0.1
 
 dev_dependencies:
   flutter_test:

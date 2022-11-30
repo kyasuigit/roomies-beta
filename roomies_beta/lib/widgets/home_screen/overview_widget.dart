@@ -54,7 +54,8 @@ class _OverviewWidgetState extends State<OverviewWidget> {
         _isMinimized
             ? Container()
             : Card(
-                child: SizedBox(
+                child: Container(
+                  color: const Color(0xFFFFF7EB),
                   height: 250,
                   child: SfCircularChart(
                     tooltipBehavior: _tooltipBehavior,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
 import 'package:provider/provider.dart';
 import 'package:roomies_beta/transitions/sliding_page_route.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../models/size_config.dart';
 import './home_screen.dart';
 import './chores_screen.dart';
 import './chat_screen.dart';
@@ -60,11 +62,11 @@ class _TabsScreenState extends State<TabsScreen> {
     return user.isFirstTimeUser
         ? const IntroductionScreen()
         : Scaffold(
-            backgroundColor: Colors.white,
+            backgroundColor: const Color(0xFFFFF7EB),
             bottomNavigationBar: BottomNavigationBar(
               iconSize: 24,
               onTap: _selectPage,
-              backgroundColor: Colors.white,
+              backgroundColor: const Color(0xFFFFF7EB),
               unselectedItemColor: Theme.of(context).colorScheme.primary,
               selectedItemColor: Theme.of(context).colorScheme.secondary,
               currentIndex: _selectedPageIndex,
@@ -97,51 +99,73 @@ class _TabsScreenState extends State<TabsScreen> {
                 ),
               ],
             ),
-            drawer: const Drawer(
-              child: MainDrawer(),
-            ),
-            body: SafeArea(
-              child: NestedScrollView(
-                headerSliverBuilder: ((context, innerBoxIsScrolled) => [
-                      SliverAppBar(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              Provider.of<House>(context).getHouseName,
-                              style: const TextStyle(fontSize: 18),
+            body: NestedScrollView(
+              headerSliverBuilder: ((context, innerBoxIsScrolled) => [
+                    SliverAppBar(
+                      title: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            Provider.of<House>(context).getHouseName,
+                            style: TextStyle(
+                              fontSize: SizeConfig.blockSizeVertical * 2.4,
+                              fontFamily: 'Gotham',
+                              color: _selectedPageIndex == 0
+                                  ? const Color(0xFF2F4858)
+                                  : const Color(0xFFF9A03F),
                             ),
-                            Container(
-                              margin: const EdgeInsets.only(left: 3.0),
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(30),
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    SlidingPageRoute(
-                                        child: const MyHousesScreen(),
-                                        route: MyHousesScreen.routeName),
-                                  );
-                                },
-                                child: const Icon(
-                                  Icons.expand_more,
-                                ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 3.0),
+                            child: InkWell(
+                              borderRadius: BorderRadius.circular(30),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  SlidingPageRoute(
+                                      child: const MyHousesScreen(),
+                                      route: MyHousesScreen.routeName),
+                                );
+                              },
+                              child: Icon(
+                                Icons.expand_more_rounded,
+                                color: _selectedPageIndex == 0
+                                    ? const Color(0xFF2F4858)
+                                    : const Color(0xFFF9A03F),
                               ),
                             ),
-                          ],
-                        ),
-                        centerTitle: true,
-                        backgroundColor: Colors.white,
-                        elevation: 0,
-                        actions: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: const Icon(Icons.notifications_none),
                           ),
                         ],
                       ),
-                    ]),
-                body: _pages[_selectedPageIndex],
-              ),
+                      centerTitle: true,
+                      backgroundColor: _selectedPageIndex == 0
+                          ? const Color.fromRGBO(249, 160, 63, 1)
+                          : Colors.transparent,
+                      elevation: 0,
+                      leading: IconButton(
+                        onPressed: () {
+                          SimpleHiddenDrawerController.of(context).toggle();
+                        },
+                        icon: Icon(
+                          Icons.menu_rounded,
+                          color: _selectedPageIndex == 0
+                              ? const Color(0xFF2F4858)
+                              : const Color(0xFFF9A03F),
+                        ),
+                      ),
+                      actions: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.notifications_none,
+                            color: _selectedPageIndex == 0
+                                ? const Color(0xFF2F4858)
+                                : const Color(0xFFF9A03F),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ]),
+              body: _pages[_selectedPageIndex],
             ),
           );
   }

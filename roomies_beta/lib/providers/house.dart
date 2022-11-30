@@ -3,9 +3,9 @@ import './app_user.dart';
 class House {
   String _houseId = '';
   String _houseName = '';
-  List<AppUser> _users = [];
+  List<String> _users = [];
 
-  House(String houseId, String houseName, List<AppUser> users) {
+  House(String houseId, String houseName, List<String> users) {
     _houseId = houseId;
     _houseName = houseName;
     _users = users;
@@ -27,11 +27,11 @@ class House {
     _houseName = newHouseName;
   }
 
-  List<AppUser> get getUsers {
+  List<String> get getUsersIds {
     return [..._users];
   }
 
-  void addUser(AppUser newUser) {
+  void addUser(String newUser) {
     _users.add(newUser);
   }
 }

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../models/size_config.dart';
+import '../../providers/app_user.dart';
+import './roommate_tile.dart';
 
 class RoommatesWidget extends StatefulWidget {
   const RoommatesWidget({super.key});
@@ -13,6 +18,7 @@ class _RoommatesWidgetState extends State<RoommatesWidget> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Column(
       children: [
         Row(
@@ -25,13 +31,15 @@ class _RoommatesWidgetState extends State<RoommatesWidget> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
+                  fontFamily: 'Gotham',
+                  color: Color(0xFF2F4858),
                 ),
               ),
             ),
             IconButton(
               icon: _isMinimized
-                  ? const Icon(Icons.add)
-                  : const Icon(Icons.remove),
+                  ? const Icon(Icons.add, color: Color(0xFF2F4858))
+                  : const Icon(Icons.remove, color: Color(0xFF2F4858)),
               splashRadius: 20,
               onPressed: () {
                 setState(() {
@@ -43,42 +51,13 @@ class _RoommatesWidgetState extends State<RoommatesWidget> {
         ),
         _isMinimized
             ? Container()
-            : Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(8.0),
-                    child: SingleChildScrollView(
-                      padding: _userCount > 4
-                          ? const EdgeInsets.only(bottom: 0)
-                          : const EdgeInsets.only(bottom: 10),
-                      scrollDirection: Axis.horizontal,
-                      child: Wrap(
-                        spacing: _userCount > 4
-                            ? MediaQuery.of(context).size.width / 9.5
-                            : MediaQuery.of(context).size.width /
-                                _userCount /
-                                2.5,
-                        alignment: WrapAlignment.spaceAround,
-                        children: <Widget>[
-                          for (int i = 0; i < _userCount; i++)
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                CircleAvatar(
-                                  backgroundColor:
-                                      Color.fromARGB(255, 255, 204, 128),
-                                  radius: 26.0,
-                                ),
-                                SizedBox(height: 8.0),
-                                Text("User"),
-                              ],
-                            ),
-                        ],
-                      ),
-                    ),
+            : SizedBox(
+                width: SizeConfig.screenWidth * 0.9,
+                height: SizeConfig.screenHeight * 0.4,
+                child: ListView.builder(
+                  itemCount: Provider.of<List<AppUser>>(context).length,
+                  itemBuilder: (context, index) => RoommateTile(
+                    roommate: Provider.of<List<AppUser>>(context)[index],
                   ),
                 ),
               ),

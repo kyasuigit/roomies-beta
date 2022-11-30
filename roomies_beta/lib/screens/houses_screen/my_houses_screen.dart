@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.dart';
 import 'package:provider/provider.dart';
 import 'package:roomies_beta/screens/houses_screen/create_house_screen.dart';
 import 'package:roomies_beta/transitions/sliding_page_route.dart';
 
+import '../../providers/app_user.dart';
 import '../../providers/house.dart';
 import '../../models/size_config.dart';
 
@@ -46,11 +48,17 @@ class MyHousesScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 5, left: 5),
                 child: IconButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    if (Navigator.of(context).canPop()) {
+                      Navigator.of(context).pop();
+                    } else {
+                      SimpleHiddenDrawerController.of(context).toggle();
+                    }
                   },
                   icon: Icon(
-                    Icons.arrow_back_rounded,
-                    size: SizeConfig.blockSizeVertical * 3.5,
+                    Navigator.of(context).canPop()
+                        ? Icons.arrow_back_rounded
+                        : Icons.menu_rounded,
+                    size: SizeConfig.blockSizeVertical * 3.2,
                     color: Colors.white,
                   ),
                 ),
@@ -97,7 +105,7 @@ class MyHousesScreen extends StatelessWidget {
                             size: SizeConfig.blockSizeVertical * 2.4,
                           ),
                           Text(
-                            ' ${Provider.of<House>(context).getUsers.length} Roommates',
+                            ' ${Provider.of<House>(context).getUsersIds.length} Roommates',
                             style: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Gotham',

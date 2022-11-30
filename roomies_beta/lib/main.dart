@@ -65,7 +65,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  @override
+  Database appDatabase = Database();
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -74,12 +75,32 @@ class _MyAppState extends State<MyApp> {
           create: (ctx) => AppUser('', '', '', false, ''),
         ),
       ],
-      builder: (context, child) => StreamProvider.value(
-        value: Database.getHouseData(
-            Provider.of<AppUser>(context).getCurrentHouse),
+      builder: (context, child) => StreamProvider<House>.value(
+        value: appDatabase
+            .getHouseData(Provider.of<AppUser>(context).getCurrentHouse),
         initialData: House('', '', []),
-        catchError: (_, error) => House(error.toString(), "Loading...", []),
-        child: child,
+        catchError: (_, error) {
+          return House(error.toString(), "Loading...", []);
+        },
+        child: Builder(
+          builder: (context) => StreamProvider<List<AppUser>>.value(
+            initialData: const [],
+            value: appDatabase
+                .getUserListData(Provider.of<House>(context).getUsersIds),
+            catchError: (_, error) {
+              return [
+                AppUser(
+                  error.toString(),
+                  error.toString(),
+                  error.toString(),
+                  false,
+                  error.toString(),
+                )
+              ];
+            },
+            child: child,
+          ),
+        ),
       ),
       child: MaterialApp(
         title: 'Roomies',

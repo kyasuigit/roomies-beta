@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../models/size_config.dart';
 
 class AdCard extends StatelessWidget {
   const AdCard({
@@ -7,10 +8,13 @@ class AdCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Card(
       color: const Color.fromRGBO(255, 204, 128, 1),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+        padding: EdgeInsets.symmetric(
+            horizontal: SizeConfig.screenWidth * 0.03,
+            vertical: SizeConfig.screenHeight * 0.015),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -20,31 +24,30 @@ class AdCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    child: const Text(
-                      "Do you want to \nsupport us?",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.left,
+                  Text(
+                    "Do you want to \nsupport us?",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: SizeConfig.blockSizeVertical * 2.5,
+                      fontWeight: FontWeight.bold,
                     ),
+                    textAlign: TextAlign.left,
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 4.0),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: SizeConfig.screenWidth * 0.02,
+                        vertical: SizeConfig.screenHeight * 0.007),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50.0),
                       color: Colors.white,
                     ),
-                    child: const Text(
+                    child: Text(
                       'Buy us a coffee!',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 204, 128),
+                        color: const Color.fromARGB(255, 255, 204, 128),
                         fontWeight: FontWeight.bold,
-                        fontSize: 12,
+                        fontSize: SizeConfig.blockSizeVertical * 1.7,
                       ),
                       textAlign: TextAlign.start,
                     ),
