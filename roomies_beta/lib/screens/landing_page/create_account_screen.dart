@@ -43,6 +43,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set(
         {
+          'currentUser': 'none',
           'email': FirebaseAuth.instance.currentUser!.email,
           'isFirstTimeUser': true,
           'displayName': _name,

@@ -66,23 +66,29 @@ class _TabsScreenState extends State<TabsScreen> {
             bottomNavigationBar: BottomNavigationBar(
               iconSize: 24,
               onTap: _selectPage,
-              backgroundColor: const Color(0xFFFFF7EB),
-              unselectedItemColor: Theme.of(context).colorScheme.primary,
-              selectedItemColor: Theme.of(context).colorScheme.secondary,
+              backgroundColor: const Color.fromARGB(255, 249, 159, 63),
+              unselectedItemColor: const Color(0xFFFFF7EB),
+              selectedItemColor: const Color(0xFFFFF7EB),
               currentIndex: _selectedPageIndex,
-              showUnselectedLabels: true,
+              showUnselectedLabels: false,
               selectedFontSize: 13,
               unselectedFontSize: 13,
               type: BottomNavigationBarType.fixed,
               elevation: 0,
-              selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+              unselectedLabelStyle: const TextStyle(
+                fontFamily: 'Gotham',
+              ),
+              selectedLabelStyle: const TextStyle(
+                fontFamily: 'Gotham',
+                fontWeight: FontWeight.bold,
+              ),
               items: const [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
+                  icon: Icon(Icons.home_rounded),
                   label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.clean_hands),
+                  icon: Icon(Icons.shopping_cart_rounded),
                   label: 'Chores',
                 ),
                 BottomNavigationBarItem(
@@ -90,11 +96,11 @@ class _TabsScreenState extends State<TabsScreen> {
                   label: 'Message',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.money),
+                  icon: Icon(Icons.money_rounded),
                   label: 'Money',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.calendar_month),
+                  icon: Icon(Icons.calendar_month_rounded),
                   label: 'Calendar',
                 ),
               ],

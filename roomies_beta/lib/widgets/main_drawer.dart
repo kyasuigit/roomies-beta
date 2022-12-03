@@ -95,14 +95,17 @@ class _MenuState extends State<Menu> {
             ),
             Material(
               color: Colors.transparent,
-              child: Text(
-                name,
+              child: AnimatedDefaultTextStyle(
                 style: (index == selectedIndex)
                     ? selectedStyle.merge(
                         TextStyle(fontSize: SizeConfig.blockSizeVertical * 4.0))
                     : unselectedStyle.merge(
                         TextStyle(fontSize: SizeConfig.blockSizeVertical * 2.0),
                       ),
+                duration: const Duration(milliseconds: 100),
+                child: Text(
+                  name,
+                ),
               ),
             ),
           ],

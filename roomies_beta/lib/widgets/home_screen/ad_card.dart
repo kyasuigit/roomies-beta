@@ -10,7 +10,7 @@ class AdCard extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Card(
-      color: const Color.fromRGBO(255, 204, 128, 1),
+      color: const Color.fromARGB(255, 249, 159, 63),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.screenWidth * 0.03,
@@ -45,7 +45,7 @@ class AdCard extends StatelessWidget {
                     child: Text(
                       'Buy us a coffee!',
                       style: TextStyle(
-                        color: const Color.fromARGB(255, 255, 204, 128),
+                        color: const Color.fromARGB(255, 249, 159, 63),
                         fontWeight: FontWeight.bold,
                         fontSize: SizeConfig.blockSizeVertical * 1.7,
                       ),

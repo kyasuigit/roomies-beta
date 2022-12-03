@@ -11,24 +11,110 @@ class RoommateTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return ListTile(
-      tileColor: const Color(0xFFDFE0DF),
-      contentPadding: EdgeInsets.symmetric(
-        vertical: SizeConfig.screenHeight * 0.015,
-        horizontal: SizeConfig.screenWidth * 0.04,
+    return Container(
+      margin: EdgeInsets.only(
+        bottom: SizeConfig.screenHeight * 0.03,
       ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      leading: Container(
-        color: const Color(0xFFFFF7EB),
-        height: SizeConfig.screenHeight * 0.02,
-        width: SizeConfig.screenWidth * 0.03,
-      ),
-      title: Text(
-        roommate.getDisplayName,
-        style: TextStyle(
-          fontFamily: 'Gotham',
-          fontSize: SizeConfig.blockSizeVertical * 2.4,
-          color: const Color(0xFF2F4858),
+      child: ListTile(
+        tileColor: const Color.fromARGB(255, 245, 118, 106),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: SizeConfig.screenHeight * 0.02,
+          horizontal: SizeConfig.screenWidth * 0.04,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        leading: Container(
+          height: SizeConfig.screenHeight * 0.075,
+          width: SizeConfig.screenHeight * 0.075,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: const Color(0xFFFFF7EB),
+          ),
+          child: Icon(
+            color: const Color.fromARGB(255, 245, 118, 106),
+            Icons.person_rounded,
+            size: SizeConfig.blockSizeVertical * 3.2,
+          ),
+        ),
+        title: SizedBox(
+          height: SizeConfig.screenHeight * 0.07,
+          width: SizeConfig.screenWidth * 0.6,
+          child: Stack(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    height: SizeConfig.screenHeight * 0.05,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          roommate.getDisplayName,
+                          style: TextStyle(
+                            fontFamily: 'Gotham',
+                            fontSize: SizeConfig.blockSizeVertical * 2.4,
+                            color: const Color(0xFFFFF7EB),
+                          ),
+                        ),
+                        Text(
+                          'Last online: 52 min ago',
+                          style: TextStyle(
+                            fontFamily: 'Gotham',
+                            fontSize: SizeConfig.blockSizeVertical * 1.4,
+                            color: const Color(0xFFFFF7EB),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: const Color(0xFFFFF7EB),
+                      borderRadius: BorderRadius.circular(20)),
+                  width: SizeConfig.screenWidth * 0.5,
+                  height: SizeConfig.screenHeight * 0.01,
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomLeft,
+                child: Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          color: const Color(0xFFFFF7EB), width: 0.5),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color.fromARGB(255, 249, 159, 63),
+                          Color(0xFFF5766A),
+                          Color(0xFFCB648C),
+                        ],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                      borderRadius: BorderRadius.circular(20)),
+                  width: SizeConfig.screenWidth * 0.5 * 0.89,
+                  height: SizeConfig.screenHeight * 0.01,
+                ),
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.expand_more_rounded,
+                    size: SizeConfig.blockSizeVertical * 3,
+                    color: const Color(0xFFFFF7EB),
+                  ),
+                  splashRadius: SizeConfig.screenHeight * 0.03,
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

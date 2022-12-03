@@ -26,13 +26,13 @@ class _RoommatesWidgetState extends State<RoommatesWidget> {
           children: [
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: const Text(
+              child: Text(
                 'Roommates',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: SizeConfig.blockSizeVertical * 3.2,
                   fontWeight: FontWeight.w600,
                   fontFamily: 'Gotham',
-                  color: Color(0xFF2F4858),
+                  color: const Color(0xFF2F4858),
                 ),
               ),
             ),
@@ -51,13 +51,16 @@ class _RoommatesWidgetState extends State<RoommatesWidget> {
         ),
         _isMinimized
             ? Container()
-            : SizedBox(
-                width: SizeConfig.screenWidth * 0.9,
-                height: SizeConfig.screenHeight * 0.4,
-                child: ListView.builder(
-                  itemCount: Provider.of<List<AppUser>>(context).length,
-                  itemBuilder: (context, index) => RoommateTile(
-                    roommate: Provider.of<List<AppUser>>(context)[index],
+            : SingleChildScrollView(
+                child: SizedBox(
+                  width: SizeConfig.screenWidth * 0.9,
+                  height: SizeConfig.screenHeight * 0.4,
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: Provider.of<List<AppUser>>(context).length,
+                    itemBuilder: (context, index) => RoommateTile(
+                      roommate: Provider.of<List<AppUser>>(context)[index],
+                    ),
                   ),
                 ),
               ),

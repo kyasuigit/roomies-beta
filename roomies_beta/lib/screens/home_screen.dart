@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/home_screen/overview_widget.dart';
 import '../widgets/home_screen/roommates_widget.dart';
 import '../providers/app_user.dart';
 import '../providers/house.dart';
@@ -98,14 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   bottomLeft: Radius.circular(15),
                   bottomRight: Radius.circular(15),
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
               ),
             ),
           ),
@@ -163,14 +154,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           Icons.money_rounded,
                           "Test",
                           Colors.cyan.shade400,
-                          Colors.cyan.shade200,
+                          Colors.cyan.shade100,
                         ),
                         buildOverviewCard(
                           "Events",
                           Icons.calendar_month_rounded,
                           "Test",
                           Colors.lightGreen.shade400,
-                          Colors.lightGreen.shade200,
+                          Colors.lightGreen.shade100,
                         ),
                       ],
                     ),
