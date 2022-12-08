@@ -183,7 +183,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               pageAnimationEnabled: true,
               pageAnimationDuration: Duration(milliseconds: 300),
               pageJumpingEnabled: true,
-              eventLoader: (day) => [Event('Test')],
+              eventLoader: (day) => [],
               firstDay: _firstDate,
               lastDay: _lastDate,
               focusedDay: _selectedDate,
