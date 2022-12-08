@@ -45,16 +45,16 @@ class MyApp extends StatefulWidget {
   static const MaterialColor secondarySwatchColor = MaterialColor(
     0xFFf1c48d,
     <int, Color>{
-      50: Color(0xFFf1c48d),
-      100: Color(0xFFf1c48d),
-      200: Color(0xFFf1c48d),
-      300: Color(0xFFf1c48d),
-      400: Color(0xFFf1c48d),
-      500: Color(0xFFf1c48d),
-      600: Color(0xFFf1c48d),
-      700: Color(0xFFf1c48d),
-      800: Color(0xFFf1c48d),
-      900: Color(0xFFf1c48d),
+      50: Color.fromARGB(255, 249, 159, 63),
+      100: Color.fromARGB(255, 249, 159, 63),
+      200: Color.fromARGB(255, 249, 159, 63),
+      300: Color.fromARGB(255, 249, 159, 63),
+      400: Color.fromARGB(255, 249, 159, 63),
+      500: Color.fromARGB(255, 249, 159, 63),
+      600: Color.fromARGB(255, 249, 159, 63),
+      700: Color.fromARGB(255, 249, 159, 63),
+      800: Color.fromARGB(255, 249, 159, 63),
+      900: Color.fromARGB(255, 249, 159, 63),
     },
   );
 

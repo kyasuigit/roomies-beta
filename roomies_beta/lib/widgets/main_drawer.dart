@@ -98,7 +98,7 @@ class _MenuState extends State<Menu> {
               child: AnimatedDefaultTextStyle(
                 style: (index == selectedIndex)
                     ? selectedStyle.merge(
-                        TextStyle(fontSize: SizeConfig.blockSizeVertical * 4.0))
+                        TextStyle(fontSize: SizeConfig.blockSizeVertical * 3.4))
                     : unselectedStyle.merge(
                         TextStyle(fontSize: SizeConfig.blockSizeVertical * 2.0),
                       ),
@@ -159,19 +159,14 @@ class _MenuState extends State<Menu> {
                         radius: 40,
                         backgroundColor: const Color(0xFFFFF7EB),
                         child: Icon(
-                          size: SizeConfig.blockSizeVertical * 3,
+                          size: SizeConfig.blockSizeVertical * 4,
                           Icons.person,
                           color: const Color(0xFFF5766A),
                         ),
                       ),
                       SizedBox(height: SizeConfig.screenHeight * 0.02),
                       Consumer<AppUser>(
-                        builder: (
-                          _,
-                          user,
-                          __,
-                        ) =>
-                            Material(
+                        builder: (_, user, __) => Material(
                           color: Colors.transparent,
                           child: Text(
                             style: TextStyle(

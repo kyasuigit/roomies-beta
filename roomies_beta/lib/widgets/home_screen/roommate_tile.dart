@@ -16,7 +16,7 @@ class RoommateTile extends StatelessWidget {
         bottom: SizeConfig.screenHeight * 0.03,
       ),
       child: ListTile(
-        tileColor: const Color.fromARGB(255, 245, 118, 106),
+        tileColor: const Color.fromRGBO(249, 160, 63, 1),
         contentPadding: EdgeInsets.symmetric(
           vertical: SizeConfig.screenHeight * 0.02,
           horizontal: SizeConfig.screenWidth * 0.04,
@@ -27,10 +27,10 @@ class RoommateTile extends StatelessWidget {
           width: SizeConfig.screenHeight * 0.075,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: const Color(0xFFFFF7EB),
+            color: Colors.white,
           ),
           child: Icon(
-            color: const Color.fromARGB(255, 245, 118, 106),
+            color: const Color.fromRGBO(249, 160, 63, 1),
             Icons.person_rounded,
             size: SizeConfig.blockSizeVertical * 3.2,
           ),
@@ -55,7 +55,7 @@ class RoommateTile extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Gotham',
                             fontSize: SizeConfig.blockSizeVertical * 2.4,
-                            color: const Color(0xFFFFF7EB),
+                            color: Colors.white,
                           ),
                         ),
                         Text(
@@ -63,7 +63,7 @@ class RoommateTile extends StatelessWidget {
                           style: TextStyle(
                             fontFamily: 'Gotham',
                             fontSize: SizeConfig.blockSizeVertical * 1.4,
-                            color: const Color(0xFFFFF7EB),
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -75,7 +75,7 @@ class RoommateTile extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                      color: const Color(0xFFFFF7EB),
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
                   width: SizeConfig.screenWidth * 0.5,
                   height: SizeConfig.screenHeight * 0.01,
@@ -85,8 +85,7 @@ class RoommateTile extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Container(
                   decoration: BoxDecoration(
-                      border: Border.all(
-                          color: const Color(0xFFFFF7EB), width: 0.5),
+                      border: Border.all(color: Colors.white, width: 0.8),
                       gradient: const LinearGradient(
                         colors: [
                           Color.fromARGB(255, 249, 159, 63),
@@ -107,7 +106,7 @@ class RoommateTile extends StatelessWidget {
                   icon: Icon(
                     Icons.expand_more_rounded,
                     size: SizeConfig.blockSizeVertical * 3,
-                    color: const Color(0xFFFFF7EB),
+                    color: Colors.white,
                   ),
                   splashRadius: SizeConfig.screenHeight * 0.03,
                   onPressed: () {},

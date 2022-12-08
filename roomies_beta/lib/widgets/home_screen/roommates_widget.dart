@@ -13,6 +13,24 @@ class RoommatesWidget extends StatefulWidget {
 }
 
 class _RoommatesWidgetState extends State<RoommatesWidget> {
+  Widget roommateList() {
+    return _isMinimized
+        ? Container()
+        : SizedBox(
+            width: SizeConfig.screenWidth * 0.9,
+            height: SizeConfig.screenHeight *
+                0.18 *
+                Provider.of<List<AppUser>>(context).length,
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: Provider.of<List<AppUser>>(context).length,
+              itemBuilder: (context, index) => RoommateTile(
+                roommate: Provider.of<List<AppUser>>(context)[index],
+              ),
+            ),
+          );
+  }
+
   final int _userCount = 4;
   bool _isMinimized = false;
 
@@ -49,21 +67,12 @@ class _RoommatesWidgetState extends State<RoommatesWidget> {
             ),
           ],
         ),
-        _isMinimized
-            ? Container()
-            : SingleChildScrollView(
-                child: SizedBox(
-                  width: SizeConfig.screenWidth * 0.9,
-                  height: SizeConfig.screenHeight * 0.4,
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: Provider.of<List<AppUser>>(context).length,
-                    itemBuilder: (context, index) => RoommateTile(
-                      roommate: Provider.of<List<AppUser>>(context)[index],
-                    ),
-                  ),
-                ),
-              ),
+        AnimatedSwitcher(
+          transitionBuilder: (child, animation) =>
+              ScaleTransition(scale: animation, child: child),
+          duration: const Duration(milliseconds: 300),
+          child: roommateList(),
+        ),
       ],
     );
   }

@@ -300,7 +300,7 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
                         fontFamily: 'Gotham',
                         fontSize: 3 * SizeConfig.blockSizeVertical,
                         fontWeight: FontWeight.bold,
-                        color: const Color(0xFFFF8885),
+                        color: const Color(0xFF5A362C),
                       ),
                     ),
                   ),
@@ -310,11 +310,13 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
                       decoration: InputDecoration(
                         prefixIcon: const Icon(
                           Icons.search,
-                          color: Color(0xFF8dbaf1),
+                          color: Color(0xFF5A362C),
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(13),
-                          borderSide: BorderSide.none,
+                          borderSide: const BorderSide(
+                            color: Color(0xFF5A362C),
+                          ),
                         ),
                         contentPadding: const EdgeInsets.symmetric(
                             vertical: 12, horizontal: 16.0),
@@ -354,7 +356,7 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
                             children: [
                               CircleAvatar(
                                 radius: deviceSize.width * 0.07,
-                                backgroundColor: const Color(0xFF8dbaf1),
+                                backgroundColor: const Color(0xFF5A362C),
                                 child: Center(
                                   child: Text(
                                     _houseUserList[index]
@@ -372,7 +374,7 @@ class _CreateHouseScreenState extends State<CreateHouseScreen> {
                                 _houseUserList[index].getDisplayName,
                                 style: const TextStyle(
                                   fontFamily: 'Gotham',
-                                  color: Color(0xFF8dbaf1),
+                                  color: Color(0xFF5A362C),
                                 ),
                               )
                             ],

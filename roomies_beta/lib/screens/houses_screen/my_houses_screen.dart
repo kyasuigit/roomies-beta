@@ -3,6 +3,7 @@ import 'package:hidden_drawer_menu/controllers/simple_hidden_drawer_controller.d
 import 'package:provider/provider.dart';
 import 'package:roomies_beta/screens/houses_screen/create_house_screen.dart';
 import 'package:roomies_beta/transitions/sliding_page_route.dart';
+import 'package:roomies_beta/widgets/home_screen/roommates_widget.dart';
 
 import '../../providers/app_user.dart';
 import '../../providers/house.dart';
@@ -16,261 +17,163 @@ class MyHousesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: const Color.fromRGBO(249, 160, 63, 1),
+      //   foregroundColor: const Color.fromARGB(255, 255, 245, 230),
+      //   child: Icon(
+      //     Icons.add_rounded,
+      //     size: SizeConfig.blockSizeVertical * 4,
+      //   ),
+      //   onPressed: () {},
+      // ),
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFFFFF7EB),
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              height: SizeConfig.screenHeight * 0.4,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(249, 160, 63, 1),
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 4,
-                    blurRadius: 10,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.only(top: 5, left: 5),
-                child: IconButton(
-                  onPressed: () {
-                    if (Navigator.of(context).canPop()) {
-                      Navigator.of(context).pop();
-                    } else {
-                      SimpleHiddenDrawerController.of(context).toggle();
-                    }
-                  },
-                  icon: Icon(
-                    Navigator.of(context).canPop()
-                        ? Icons.arrow_back_rounded
-                        : Icons.menu_rounded,
-                    size: SizeConfig.blockSizeVertical * 3.2,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SafeArea(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: SizedBox(
-                height: SizeConfig.screenHeight * 0.34,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.screenHeight * 0.005,
+                    horizontal: SizeConfig.screenWidth * 0.01),
+                child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      height: SizeConfig.screenHeight * 0.05,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: SizeConfig.screenHeight * 0.02,
-                      ),
-                      child: Text(
-                        Provider.of<House>(context).getHouseName,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'Gotham',
-                          fontSize: SizeConfig.blockSizeVertical * 5,
-                        ),
-                        textAlign: TextAlign.center,
+                    IconButton(
+                      onPressed: () {
+                        if (Navigator.of(context).canPop()) {
+                          Navigator.of(context).pop();
+                        } else {
+                          SimpleHiddenDrawerController.of(context).toggle();
+                        }
+                      },
+                      icon: Icon(
+                        Navigator.of(context).canPop()
+                            ? Icons.arrow_back_rounded
+                            : Icons.menu_rounded,
+                        size: SizeConfig.blockSizeVertical * 3.2,
+                        color: const Color(0xFF2F4858),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        bottom: SizeConfig.screenHeight * 0.02,
+                    Text(
+                      'My House',
+                      style: TextStyle(
+                        color: const Color(0xFF2F4858),
+                        fontSize: SizeConfig.blockSizeVertical * 2.2,
+                        fontFamily: 'Gotham',
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: SizeConfig.blockSizeVertical * 2.4,
-                          ),
-                          Text(
-                            ' ${Provider.of<House>(context).getUsersIds.length} Roommates',
+                    ),
+                    PopupMenuButton(
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          child: Text(
+                            'Edit House',
                             style: TextStyle(
-                              color: Colors.white,
+                              fontFamily: 'Gotham',
+                              fontSize: SizeConfig.blockSizeVertical * 2,
+                              color: const Color(0xFF2F4858),
+                            ),
+                          ),
+                        ),
+                        PopupMenuItem(
+                          child: Text(
+                            'Leave House',
+                            style: TextStyle(
+                              color: Colors.red.shade500,
                               fontFamily: 'Gotham',
                               fontSize: SizeConfig.blockSizeVertical * 2,
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: SizeConfig.screenWidth * 0.80,
-                      margin: EdgeInsets.only(
-                          bottom: SizeConfig.screenHeight * 0.025),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(
-                              right: SizeConfig.screenWidth * 0.03,
-                            ),
-                            width: SizeConfig.screenWidth * 0.2,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 4.0,
-                              horizontal: 2.0,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2.0,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Icon(
-                                  Icons.money,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  '31%',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Gotham',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            width: SizeConfig.screenWidth * 0.80 / 4,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 4.0,
-                              horizontal: 2.0,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border: Border.all(
-                                color: Colors.white,
-                                width: 2.0,
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Icon(
-                                  Icons.clean_hands,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  '72%',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Gotham',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(
-                              left: SizeConfig.screenWidth * 0.03,
-                            ),
-                            width: SizeConfig.screenWidth * 0.80 / 4,
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 4.0,
-                              horizontal: 2.0,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(40),
-                              border:
-                                  Border.all(color: Colors.white, width: 2.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                Icon(
-                                  Icons.set_meal,
-                                  color: Colors.white,
-                                  size: 20,
-                                ),
-                                Text(
-                                  '55%',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Gotham',
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ElevatedButton(
-                      style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
-                          Size(SizeConfig.screenWidth * 0.72, 0),
                         ),
-                        padding: MaterialStateProperty.all(
-                          EdgeInsets.symmetric(
-                            vertical: SizeConfig.screenHeight * 0.016,
-                            horizontal: SizeConfig.screenWidth * 0.02,
-                          ),
-                        ),
-                        shape: MaterialStateProperty.all(
-                          const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(25),
-                            ),
-                          ),
-                        ),
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
-                        shadowColor: MaterialStateProperty.all(Colors.grey),
-                        elevation: MaterialStateProperty.all(2),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          SlidingPageRoute(
-                            child: const CreateHouseScreen(),
-                            route: CreateHouseScreen.routeName,
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Create a House',
-                        style: TextStyle(
-                          color: const Color.fromRGBO(249, 160, 63, 1),
-                          fontFamily: 'Gotham',
-                          fontWeight: FontWeight.bold,
-                          fontSize: SizeConfig.blockSizeVertical * 2.2,
-                        ),
+                      ],
+                      icon: Icon(
+                        Icons.more_vert_rounded,
+                        size: SizeConfig.blockSizeVertical * 3.2,
+                        color: const Color(0xFF2F4858),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+            Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                margin: EdgeInsets.only(top: SizeConfig.screenHeight * 0.08),
+                height: SizeConfig.screenHeight * 0.18,
+                width: SizeConfig.screenWidth * 0.9,
+                // decoration: const BoxDecoration(
+                //   color: Color.fromRGBO(249, 160, 63, 1),
+                //   borderRadius: BorderRadius.all(
+                //     Radius.circular(6),
+                //   ),
+                // ),
+                padding: EdgeInsets.symmetric(
+                    vertical: SizeConfig.screenHeight * 0.025,
+                    horizontal: SizeConfig.screenWidth * 0.04),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      Provider.of<House>(context).getHouseName,
+                      style: TextStyle(
+                        color: const Color(0xFF1A1A1A),
+                        // fontWeight: FontWeight.bold,
+                        fontFamily: 'Gotham',
+                        fontSize: SizeConfig.blockSizeVertical * 4.8,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: const Color(0xFF1A1A1A),
+                          size: SizeConfig.blockSizeVertical * 3.4,
+                        ),
+                        Text(
+                          ' ${Provider.of<House>(context).getUsersIds.length} Roommates',
+                          style: TextStyle(
+                            color: const Color(0xFF1A1A1A),
+                            fontFamily: 'Gotham',
+                            fontSize: SizeConfig.blockSizeVertical * 2.5,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                height: SizeConfig.screenHeight * 0.65,
+                width: SizeConfig.screenWidth * 0.9,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Text(
+                    //   'Roommates',
+                    //   style: TextStyle(
+                    //     fontSize: SizeConfig.blockSizeVertical * 3.2,
+                    //     fontWeight: FontWeight.w600,
+                    //     fontFamily: 'Gotham',
+                    //     color: const Color(0xFF2F4858),
+                    //   ),
+                    // ),
+                    RoommatesWidget()
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

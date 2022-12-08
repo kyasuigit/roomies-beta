@@ -9,8 +9,18 @@ class AdCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Card(
-      color: const Color.fromARGB(255, 249, 159, 63),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        gradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(255, 249, 159, 63),
+            Color(0xFFF5766A),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: SizeConfig.screenWidth * 0.03,

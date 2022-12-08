@@ -64,9 +64,9 @@ class _TabsScreenState extends State<TabsScreen> {
         : Scaffold(
             backgroundColor: const Color(0xFFFFF7EB),
             bottomNavigationBar: BottomNavigationBar(
-              iconSize: 24,
+              iconSize: SizeConfig.blockSizeVertical * 3.4,
               onTap: _selectPage,
-              backgroundColor: const Color.fromARGB(255, 249, 159, 63),
+              backgroundColor: const Color(0xFFF9A03A),
               unselectedItemColor: const Color(0xFFFFF7EB),
               selectedItemColor: const Color(0xFFFFF7EB),
               currentIndex: _selectedPageIndex,
@@ -74,7 +74,7 @@ class _TabsScreenState extends State<TabsScreen> {
               selectedFontSize: 13,
               unselectedFontSize: 13,
               type: BottomNavigationBarType.fixed,
-              elevation: 0,
+              elevation: 15,
               unselectedLabelStyle: const TextStyle(
                 fontFamily: 'Gotham',
               ),

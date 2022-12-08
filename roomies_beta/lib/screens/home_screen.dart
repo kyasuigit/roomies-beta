@@ -42,14 +42,14 @@ class _HomeScreenState extends State<HomeScreen> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 2,
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.grey.withOpacity(0.2),
+          //     spreadRadius: 2,
+          //     blurRadius: 8,
+          //     offset: const Offset(0, 2),
+          //   ),
+          // ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,9 +91,9 @@ class _HomeScreenState extends State<HomeScreen> {
             alignment: Alignment.topCenter,
             child: Container(
               height: SizeConfig.screenHeight * 0.4,
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(249, 160, 63, 1),
-                borderRadius: const BorderRadius.only(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 249, 159, 63),
+                borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(15),
                   bottomRight: Radius.circular(15),
                 ),
