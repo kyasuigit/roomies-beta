@@ -17,17 +17,17 @@ class MyHousesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: const Color.fromRGBO(249, 160, 63, 1),
-      //   foregroundColor: const Color.fromARGB(255, 255, 245, 230),
-      //   child: Icon(
-      //     Icons.add_rounded,
-      //     size: SizeConfig.blockSizeVertical * 4,
-      //   ),
-      //   onPressed: () {},
-      // ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: const Color.fromRGBO(249, 160, 63, 1),
+        foregroundColor: const Color.fromARGB(255, 255, 245, 230),
+        child: Icon(
+          Icons.add_rounded,
+          size: SizeConfig.blockSizeVertical * 4,
+        ),
+        onPressed: () {},
+      ),
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 255, 245, 230),
       body: SafeArea(
         child: Stack(
           children: [
